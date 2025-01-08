@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Modernize": {
+    "AuthStarterkit": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": ["bezier-easing"],
-            "outputPath": "dist/Modernize",
+            "outputPath": "dist/AuthStarterkit",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -59,13 +59,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Modernize:build:production"
+              "buildTarget": "AuthStarterkit:build:production"
             },
             "hmr": {
               "hmr": true
             },
             "development": {
-              "buildTarget": "Modernize:build:development"
+              "buildTarget": "AuthStarterkit:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "Modernize:build"
+            "buildTarget": "AuthStarterkit:build"
           }
         },
         "test": {

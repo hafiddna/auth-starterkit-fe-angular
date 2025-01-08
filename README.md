@@ -1,2 +1,2 @@
-# Modernize-Angular-pro
-Modernize Angular Admin Dashboard
+# Auth Starterkit-Angular-pro
+Auth Starterkit Angular Admin Dashboard
