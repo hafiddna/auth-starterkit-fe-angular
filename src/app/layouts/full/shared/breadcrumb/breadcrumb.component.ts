@@ -33,10 +33,8 @@ export class AppBreadcrumbComponent {
       )
       .pipe(filter((route) => route.outlet === 'primary'))
       .pipe(mergeMap((route) => route.data))
-      // tslint:disable-next-line - Disables all
       .subscribe((event) => {
-        // tslint:disable-next-line - Disables all
-        this.titleService.setTitle(event['title'] + ' - Angular 19');
+        this.titleService.setTitle(event['title'] + ' - Auth Starterkit');
         this.pageInfo = event;
       });
   }

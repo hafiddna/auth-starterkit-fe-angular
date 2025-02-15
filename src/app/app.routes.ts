@@ -1,27 +1,25 @@
 import { Routes } from '@angular/router';
+import { authGuard } from "./auth.guard";
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import {NotFoundComponent} from "./pages/authentication/not-found/not-found.component";
 
 export const routes: Routes = [
   {
     path: '',
     component: FullComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
-        redirectTo: '/starter',
+        redirectTo: '/dashboard',
         pathMatch: 'full',
       },
       {
-        path: 'starter',
+        path: '',
         loadChildren: () =>
           import('./pages/pages.routes').then((m) => m.PagesRoutes),
-      },
-      {
-        path: 'sample-page',
-        loadChildren: () =>
-          import('./pages/pages.routes').then((m) => m.PagesRoutes),
-      },
+      }
     ],
   },
   {
@@ -29,7 +27,7 @@ export const routes: Routes = [
     component: BlankComponent,
     children: [
       {
-        path: 'authentication',
+        path: '',
         loadChildren: () =>
           import('./pages/authentication/authentication.routes').then(
             (m) => m.AuthenticationRoutes
@@ -39,6 +37,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'authentication/error',
+    component: NotFoundComponent,
   },
 ];

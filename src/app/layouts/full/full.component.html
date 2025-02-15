@@ -4,10 +4,10 @@
   autoFocus
   [ngClass]="{
   'sidebarNav-mini': options.sidenavCollapsed && options.navPos !== 'top' &&  !resView,
-  
+
   'sidebarNav-horizontal': options.horizontal,
   cardBorder: options.cardBorder,
-  
+
 }"
   [dir]="options.dir!"
 >
@@ -52,7 +52,7 @@
           <div class="m-l-auto">
             <a
               mat-icon-button
-              [routerLink]="['/authentication/login']"
+              [routerLink]="['/login']"
               class="d-flex justify-content-center"
             >
               <i-tabler
@@ -101,7 +101,7 @@
         <div class="m-l-auto">
           <a
             mat-icon-button
-            [routerLink]="['/authentication/login']"
+            [routerLink]="['/login']"
             class="d-flex justify-content-center"
           >
             <i-tabler

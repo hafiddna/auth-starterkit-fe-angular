@@ -70,20 +70,25 @@ export class AppHorizontalHeaderComponent {
       icon: '/assets/images/flag/icon-flag-en.svg',
     },
     {
-      language: 'Español',
-      code: 'es',
-      icon: '/assets/images/flag/icon-flag-es.svg',
+      language: 'Indonesia',
+      code: 'id',
+      icon: '/assets/images/flag/icon-flag-id.png',
     },
-    {
-      language: 'Français',
-      code: 'fr',
-      icon: '/assets/images/flag/icon-flag-fr.svg',
-    },
-    {
-      language: 'German',
-      code: 'de',
-      icon: '/assets/images/flag/icon-flag-de.svg',
-    },
+    // {
+    //   language: 'Español',
+    //   code: 'es',
+    //   icon: '/assets/images/flag/icon-flag-es.svg',
+    // },
+    // {
+    //   language: 'Français',
+    //   code: 'fr',
+    //   icon: '/assets/images/flag/icon-flag-fr.svg',
+    // },
+    // {
+    //   language: 'German',
+    //   code: 'de',
+    //   icon: '/assets/images/flag/icon-flag-de.svg',
+    // },
   ];
 
   constructor(

@@ -153,17 +153,17 @@ export class FullComponent implements OnInit {
     {
       id: 2,
       title: 'Authentication Design',
-      link: '/authentication/login',
+      link: '/login',
     },
     {
       id: 3,
       title: 'Register Now',
-      link: '/authentication/side-register',
+      link: '/side-register',
     },
     {
       id: 4,
       title: '404 Error Page',
-      link: '/authentication/error',
+      link: '/error',
     },
     {
       id: 5,
@@ -210,7 +210,7 @@ export class FullComponent implements OnInit {
 
     // Initialize project theme with options
     this.receiveOptions(this.options);
-    
+
     // This is for scroll to top
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -247,13 +247,13 @@ export class FullComponent implements OnInit {
 
   receiveOptions(options: AppSettings): void {
     //this.options = options;
-    
+
     this.toggleDarkTheme(options);
     this.toggleColorsTheme(options);
   }
 
   toggleDarkTheme(options: AppSettings) {
-    
+
     if (options.theme === 'dark') {
       this.htmlElement.classList.add('dark-theme');
       this.htmlElement.classList.remove('light-theme');

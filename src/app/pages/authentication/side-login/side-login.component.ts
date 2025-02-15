@@ -27,6 +27,6 @@ export class AppSideLoginComponent {
 
   submit() {
     // console.log(this.form.value);
-    this.router.navigate(['/starter']);
+    this.router.navigate(['/dashboard']);
   }
 }

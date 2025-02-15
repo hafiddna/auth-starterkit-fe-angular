@@ -17,103 +17,103 @@
     <!-- --------------------------------------------------------------- -->
     <!--  Search -->
     <!-- --------------------------------------------------------------- -->
-    <button mat-icon-button (click)="openDialog()" class="d-flex align-items-center justify-content-center m-x-4">
-      <i-tabler name="search" class="icon-20 d-flex"></i-tabler>
-    </button>
+<!--    <button mat-icon-button (click)="openDialog()" class="d-flex align-items-center justify-content-center m-x-4">-->
+<!--      <i-tabler name="search" class="icon-20 d-flex"></i-tabler>-->
+<!--    </button>-->
 
-    <div class="d-none d-lg-flex">
-      <!-- --------------------------------------------------------------- -->
-      <!--  Links -->
-      <!-- --------------------------------------------------------------- -->
-      <button
-        mat-button
-        [matMenuTriggerFor]="appsmenu"
-        aria-label="Notifications"
-      >
-        <div class="d-flex align-items-center">
-          Apps <i-tabler name="chevron-down" class="icon-16 m-l-4"></i-tabler>
-        </div>
-      </button>
-      <mat-menu #appsmenu="matMenu" class="apps-dd cardWithShadow">
-        <div class="row">
-          <div class="col-sm-8 b-r-1 p-r-0">
-            <div class="p-32 p-b-0">
-              <div class="row">
-                @for(appdd of apps; track appdd.title) {
-                <div class="col-sm-6 text-hover-primary">
-                  <a
-                    [routerLink]="[appdd.link]"
-                    class="d-flex align-items-center text-decoration-none m-b-24"
-                  >
-                    <span
-                      class="text-primary bg-light rounded icon-40 d-flex align-items-center justify-content-center"
-                    >
-                      <img [src]="appdd.img" width="20" />
-                    </span>
+<!--    <div class="d-none d-lg-flex">-->
+<!--      &lt;!&ndash; -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; &ndash;&gt;-->
+<!--      &lt;!&ndash;  Links &ndash;&gt;-->
+<!--      &lt;!&ndash; -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; &ndash;&gt;-->
+<!--      <button-->
+<!--        mat-button-->
+<!--        [matMenuTriggerFor]="appsmenu"-->
+<!--        aria-label="Notifications"-->
+<!--      >-->
+<!--        <div class="d-flex align-items-center">-->
+<!--          Apps <i-tabler name="chevron-down" class="icon-16 m-l-4"></i-tabler>-->
+<!--        </div>-->
+<!--      </button>-->
+<!--      <mat-menu #appsmenu="matMenu" class="apps-dd cardWithShadow">-->
+<!--        <div class="row">-->
+<!--          <div class="col-sm-8 b-r-1 p-r-0">-->
+<!--            <div class="p-32 p-b-0">-->
+<!--              <div class="row">-->
+<!--                @for(appdd of apps; track appdd.title) {-->
+<!--                <div class="col-sm-6 text-hover-primary">-->
+<!--                  <a-->
+<!--                    [routerLink]="[appdd.link]"-->
+<!--                    class="d-flex align-items-center text-decoration-none m-b-24"-->
+<!--                  >-->
+<!--                    <span-->
+<!--                      class="text-primary bg-light rounded icon-40 d-flex align-items-center justify-content-center"-->
+<!--                    >-->
+<!--                      <img [src]="appdd.img" width="20" />-->
+<!--                    </span>-->
 
-                    <div class="m-l-16">
-                      <h5
-                        class="f-s-14 f-w-600 m-0 textprimary  hover-text"
-                      >
-                        {{ appdd.title }}
-                      </h5>
-                      <span class=" f-s-12">{{
-                        appdd.subtitle
-                      }}</span>
-                    </div>
-                  </a>
-                </div>
-                }
-              </div>
-            </div>
-            <div
-              class="b-t-1 p-24 d-none d-lg-flex align-items-center justify-content-between"
-            >
-              <span
-                class="d-flex align-items-center  f-s-16 f-w-500"
-              >
-                <i-tabler name="help" class="icon-20 m-r-8"></i-tabler
-                >Frequently Asked Questions
-              </span>
-              <a
-                [routerLink]="['/theme-pages/faq']"
-                mat-flat-button
-                color="primary"
-                >Check</a
-              >
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="p-x-16 p-y-32">
-              <h4 class="f-s-18 f-w-600  m-b-16">Quick Links</h4>
-              @for(quicklink of quicklinks; track quicklink.title) {
-              <div class="text-hover-primary">
-                <a
-                  [routerLink]="[quicklink.link]"
-                  class="hover-text text-decoration-none  f-w-600 d-block p-y-8"
-                  >{{ quicklink.title }}</a
-                >
-              </div>
-              }
-            </div>
-          </div>
-        </div>
-      </mat-menu>
-      <a mat-button [routerLink]="['/']">Chat</a>
-      <a mat-button [routerLink]="['/']">Calendar</a>
-      <a mat-button [routerLink]="['/']">Email</a>
-    </div>
+<!--                    <div class="m-l-16">-->
+<!--                      <h5-->
+<!--                        class="f-s-14 f-w-600 m-0 textprimary  hover-text"-->
+<!--                      >-->
+<!--                        {{ appdd.title }}-->
+<!--                      </h5>-->
+<!--                      <span class=" f-s-12">{{-->
+<!--                        appdd.subtitle-->
+<!--                      }}</span>-->
+<!--                    </div>-->
+<!--                  </a>-->
+<!--                </div>-->
+<!--                }-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="b-t-1 p-24 d-none d-lg-flex align-items-center justify-content-between"-->
+<!--            >-->
+<!--              <span-->
+<!--                class="d-flex align-items-center  f-s-16 f-w-500"-->
+<!--              >-->
+<!--                <i-tabler name="help" class="icon-20 m-r-8"></i-tabler-->
+<!--                >Frequently Asked Questions-->
+<!--              </span>-->
+<!--              <a-->
+<!--                [routerLink]="['/theme-pages/faq']"-->
+<!--                mat-flat-button-->
+<!--                color="primary"-->
+<!--                >Check</a-->
+<!--              >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-sm-4">-->
+<!--            <div class="p-x-16 p-y-32">-->
+<!--              <h4 class="f-s-18 f-w-600  m-b-16">Quick Links</h4>-->
+<!--              @for(quicklink of quicklinks; track quicklink.title) {-->
+<!--              <div class="text-hover-primary">-->
+<!--                <a-->
+<!--                  [routerLink]="[quicklink.link]"-->
+<!--                  class="hover-text text-decoration-none  f-w-600 d-block p-y-8"-->
+<!--                  >{{ quicklink.title }}</a-->
+<!--                >-->
+<!--              </div>-->
+<!--              }-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </mat-menu>-->
+<!--      <a mat-button [routerLink]="['/']">Chat</a>-->
+<!--      <a mat-button [routerLink]="['/']">Calendar</a>-->
+<!--      <a mat-button [routerLink]="['/']">Email</a>-->
+<!--    </div>-->
 
     <span class="flex-1-auto"></span>
 
     <!-- Mobile Menu -->
-    <button
-      mat-icon-button
-      (click)="toggleMobileFilterNav.emit()"
-      class="d-flex d-lg-none justify-content-center m-x-4"
-    >
-      <i-tabler name="grid-dots" class="icon-20 d-flex"></i-tabler>
-    </button>
+<!--    <button-->
+<!--      mat-icon-button-->
+<!--      (click)="toggleMobileFilterNav.emit()"-->
+<!--      class="d-flex d-lg-none justify-content-center m-x-4"-->
+<!--    >-->
+<!--      <i-tabler name="grid-dots" class="icon-20 d-flex"></i-tabler>-->
+<!--    </button>-->
 
     <!-- --------------------------------------------------------------- -->
     <!-- langugage Dropdown -->
@@ -285,7 +285,7 @@
 
       <div class="p-y-12 p-x-32">
         <a
-          [routerLink]="['/authentication/login']"
+          [routerLink]="['/login']"
           mat-stroked-button
           color="primary"
           class="w-100"

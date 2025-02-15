@@ -65,8 +65,8 @@ export class HeaderComponent {
   @Output() toggleMobileNav = new EventEmitter<void>();
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
-  
-  
+
+
   showFiller = false;
 
   public selectedLanguage: any = {
@@ -84,20 +84,25 @@ export class HeaderComponent {
       icon: '/assets/images/flag/icon-flag-en.svg',
     },
     {
-      language: 'Español',
-      code: 'es',
-      icon: '/assets/images/flag/icon-flag-es.svg',
+      language: 'Indonesia',
+      code: 'id',
+      icon: '/assets/images/flag/icon-flag-id.png',
     },
-    {
-      language: 'Français',
-      code: 'fr',
-      icon: '/assets/images/flag/icon-flag-fr.svg',
-    },
-    {
-      language: 'German',
-      code: 'de',
-      icon: '/assets/images/flag/icon-flag-de.svg',
-    },
+    // {
+    //   language: 'Español',
+    //   code: 'es',
+    //   icon: '/assets/images/flag/icon-flag-es.svg',
+    // },
+    // {
+    //   language: 'Français',
+    //   code: 'fr',
+    //   icon: '/assets/images/flag/icon-flag-fr.svg',
+    // },
+    // {
+    //   language: 'German',
+    //   code: 'de',
+    //   icon: '/assets/images/flag/icon-flag-de.svg',
+    // },
   ];
 
   @Output() optionsChange = new EventEmitter<AppSettings>();
@@ -109,11 +114,11 @@ export class HeaderComponent {
     private translate: TranslateService
   ) {
     translate.setDefaultLang('en');
-    
+
   }
 
   options = this.settings.getOptions();
-  
+
 
   openDialog() {
     const dialogRef = this.dialog.open(AppSearchDialogComponent);
@@ -131,7 +136,7 @@ export class HeaderComponent {
   setlightDark(theme: string) {
     this.options.theme =theme;
     this.emitOptions();
-    
+
   }
 
   private emitOptions() {

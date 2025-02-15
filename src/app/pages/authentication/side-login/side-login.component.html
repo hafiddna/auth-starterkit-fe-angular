@@ -76,7 +76,7 @@
 
               <div class="d-flex align-items-center m-b-12">
                 <mat-checkbox color="primary">Remember this Device</mat-checkbox>
-                <a [routerLink]="['/authentication/login']"
+                <a [routerLink]="['/login']"
                   class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">Forgot Password ?</a>
               </div>
               <button mat-flat-button color="primary" class="w-100" [disabled]="!form.valid">
@@ -85,7 +85,7 @@
               <!-- input -->
             </form>
             <span class="d-block f-w-500 d-block m-t-24">New to Auth Starterkit?
-              <a [routerLink]="['/authentication/register']"
+              <a [routerLink]="['/register']"
                 class="text-decoration-none text-primary f-w-500 f-s-14">
                 Create an account</a>
             </span>
