@@ -9,7 +9,7 @@ import {
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
 import { navItems } from '../sidebar/sidebar-data';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { RouterModule } from '@angular/router';
@@ -55,6 +55,7 @@ interface quicklinks {
     NgScrollbarModule,
     TablerIconsModule,
     MaterialModule,
+    TranslateModule,
   ],
   templateUrl: './header.component.html',
   encapsulation: ViewEncapsulation.None,
@@ -183,21 +184,7 @@ export class HeaderComponent {
       title: 'My Profile',
       subtitle: 'Account Settings',
       link: '/',
-    },
-    {
-      id: 2,
-      img: '/assets/images/svgs/icon-inbox.svg',
-      title: 'My Inbox',
-      subtitle: 'Messages & Email',
-      link: '/',
-    },
-    {
-      id: 3,
-      img: '/assets/images/svgs/icon-tasks.svg',
-      title: 'My Tasks',
-      subtitle: 'To-do and Daily Tasks',
-      link: '/',
-    },
+    }
   ];
 
   apps: apps[] = [

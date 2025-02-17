@@ -11,10 +11,11 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-customizer',
-  imports: [TablerIconsModule, MaterialModule, FormsModule, NgScrollbarModule],
+  imports: [TablerIconsModule, MaterialModule, FormsModule, NgScrollbarModule, TranslateModule],
   templateUrl: './customizer.component.html',
   styleUrls: ['./customizer.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -26,12 +27,12 @@ export class CustomizerComponent {
   hideSingleSelectionIndicator = signal(true);
 
   constructor(private settings: CoreService) {
-    
+
   }
   setDark(theme: string) {
     this.settings.setOptions({ theme: theme });
     this.emitOptions();
-    
+
   }
 
   setColor(color: string) {
@@ -43,7 +44,7 @@ export class CustomizerComponent {
     this.settings.setOptions({ dir: dir });
     this.emitOptions();
   }
-  
+
 
   setSidebar(sidenavOpened: boolean) {
     this.settings.setOptions({ sidenavOpened: sidenavOpened });
