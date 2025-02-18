@@ -6,10 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { BrandingComponent } from 'src/app/layouts/full/vertical/sidebar/branding.component';
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-side-register',
-  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule, BrandingComponent],
+  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule, BrandingComponent, TranslateModule],
   templateUrl: './side-register.component.html',
 })
 export class AppSideRegisterComponent {

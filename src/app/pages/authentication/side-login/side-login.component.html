@@ -75,19 +75,19 @@
               </mat-form-field>
 
               <div class="d-flex align-items-center m-b-12">
-                <mat-checkbox color="primary">Remember this Device</mat-checkbox>
+                <mat-checkbox color="primary">{{ "Remember this Device" | translate }}</mat-checkbox>
                 <a [routerLink]="['/login']"
-                  class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">Forgot Password ?</a>
+                  class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">{{ "Forgot Password" | translate }} ?</a>
               </div>
               <button mat-flat-button color="primary" class="w-100" [disabled]="!form.valid">
-                Sign In
+                {{ "Sign In" | translate }}
               </button>
               <!-- input -->
             </form>
             <span class="d-block f-w-500 d-block m-t-24">New to Auth Starterkit?
               <a [routerLink]="['/register']"
                 class="text-decoration-none text-primary f-w-500 f-s-14">
-                Create an account</a>
+                {{ "Create an account" | translate }}</a>
             </span>
           </div>
         </div>

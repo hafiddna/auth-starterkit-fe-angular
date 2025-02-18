@@ -6,10 +6,11 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrandingComponent } from 'src/app/layouts/full/vertical/sidebar/branding.component';
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-side-login',
-  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule, BrandingComponent],
+  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule, BrandingComponent, TranslateModule],
   templateUrl: './side-login.component.html',
 })
 export class AppSideLoginComponent {
