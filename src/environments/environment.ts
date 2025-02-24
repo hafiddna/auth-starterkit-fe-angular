@@ -2,7 +2,9 @@ export const environment = {
   production: true,
   appName: "Auth Starterkit",
   // TODO: Set the API URL
-  apiUrl: '',
+  apiUrl: "",
   // TODO: Auth JWT Public Key
-  authJwtPublicKey: ''
+  authJwtPublicKey: "",
+  // TODO: Data Encryption Key
+  dataEncryptionKey: ""
 };
