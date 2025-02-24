@@ -29,5 +29,13 @@
   "Create an account": "Buat akun",
   "Already have an Account?": "Sudah memiliki akun?",
   "Sign In": "Masuk",
-  "Sign Up": "Daftar"
+  "Sign Up": "Daftar",
+  "Welcome to": "Selamat datang di",
+  "Credentials": "Kredensial",
+  "Password": "Kata Sandi",
+  "is required": "dibutuhkan",
+  "should be at least": "harus setidaknya",
+  "characters": "karakter",
+  "Your Admin Dashboard": "Dasbor Admin Anda",
+  "New to": "Baru di"
 }

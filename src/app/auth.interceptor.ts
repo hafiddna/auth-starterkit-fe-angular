@@ -1,78 +1,96 @@
-import {HttpHandlerFn, HttpInterceptorFn} from '@angular/common/http';
-import { inject } from '@angular/core';
-import { TokenService } from "./services/token.service";
-import { AuthService } from "./services/auth.service";
-import { HttpRequest } from '@angular/common/http';
-import { from, lastValueFrom, switchMap } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
+import { TokenService } from './services/token.service';
+import { AuthService } from './services/auth.service';
+import { Observable, catchError, throwError, switchMap, from } from 'rxjs';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const tokenService = inject(TokenService);
-  const authService = inject(AuthService);
+@Injectable({ providedIn: 'root' })
+export class AuthInterceptor implements HttpInterceptor {
+  private isRefreshing = false;
 
-  return from(handleRequest(req, tokenService, authService)).pipe(
-    switchMap((updatedReq) => next(updatedReq))
-  );
-};
+  constructor(private tokenService: TokenService, private authService: AuthService) {}
 
-async function handleRequest(
-  req: HttpRequest<any>,
-  tokenService: TokenService,
-  authService: AuthService
-): Promise<HttpRequest<any>> {
-  let accessToken = tokenService.getAccessToken();
-
-  // If access token is missing, try refreshing it using the refresh token from IndexedDB
-  if (!accessToken) {
-    const refreshToken = await tokenService.getRefreshToken();
-
-    if (refreshToken) {
-      try {
-        const newTokens = await authService.refreshToken(refreshToken).toPromise();
-
-        if (newTokens) {
-          tokenService.setAccessToken(newTokens.accessToken);
-          tokenService.setRefreshToken(newTokens.refreshToken);
-          accessToken = newTokens.accessToken;
-        }
-      } catch (error) {
-        console.error('Failed to refresh token:', error);
-      }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    let appId = localStorage.getItem('appId');
+    if (appId) {
+      req = req.clone({
+        setHeaders: { 'X-App-Id': appId },
+      });
+    } else {
+      const newAppId = crypto.randomUUID();
+      req = req.clone({
+        setHeaders: { 'X-App-Id': newAppId },
+      });
+      localStorage.setItem('appId', newAppId);
     }
-  }
 
-  // Clone the request and add the Authorization header if the access token is available
-  if (accessToken) {
     req = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      setHeaders: { 'X-Device-Category': 'Web' },
     });
+
+    // Determine device type based on window width
+    const width = window.innerWidth;
+    let deviceType = 'Desktop Browser';
+    if (width <= 768) {
+      deviceType = 'Mobile Browser';
+    } else if (width <= 1024) {
+      deviceType = 'Tablet Browser';
+    }
+
+    req = req.clone({
+      setHeaders: { 'X-Device-Type': deviceType },
+    });
+
+    let accessToken = this.tokenService.getAccessToken();
+    // Set Authorization header if access token exists
+    if (accessToken) {
+      req = req.clone({
+        setHeaders: { Authorization: `Bearer ${accessToken}` },
+      });
+    }
+
+    return next.handle(req).pipe(
+      catchError((error) => {
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          return this.handle401Error(req, next)
+        }
+
+        return throwError(() => error)
+      })
+    );
   }
 
-  // Set user agent
-  req = req.clone({
-    setHeaders: {
-      'User-Agent': navigator.userAgent,
-      'X-Device-Category': 'Web',
-    },
-  });
+  private handle401Error(req: HttpRequest<any>, next: HttpHandler) {
+    if (!this.isRefreshing) {
+      this.isRefreshing = true;
 
-  // Reading window width and height, to set "X-Device-Type" header
-  const width = window.innerWidth;
-  let deviceType = 'Desktop Browser';
+      return from(this.tokenService.getRefreshToken()).pipe(
+        switchMap((refreshToken) => {
+          if (!refreshToken) {
+            this.isRefreshing = false;
+            return this.authService.logout();
+          }
 
-  if (width <= 768) {
-    deviceType = 'Mobile Browser';
-  } else if (width <= 1024) {
-    deviceType = 'Tablet Browser';
+          return this.authService.refreshToken(refreshToken).pipe(
+            switchMap(() => {
+              this.isRefreshing = false;
+              return next.handle(req);
+            }),
+            catchError((error) => {
+              this.isRefreshing = false;
+              this.authService.logout();
+              return throwError(() => error)
+            })
+          );
+        }),
+        catchError((error) => {
+          this.isRefreshing = false;
+          this.authService.logout();
+          return throwError(() => error)
+        })
+      );
+    }
+
+    return next.handle(req);
   }
-
-  // Set device type
-  req = req.clone({
-    setHeaders: {
-      'X-Device-Type': deviceType,
-    },
-  });
-
-  return req;
 }

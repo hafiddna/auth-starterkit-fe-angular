@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { TokenService} from "./token.service";
+import { TokenService } from "./token.service";
 import { environment } from "../../environments/environment";
 
 @Injectable({
@@ -13,34 +13,48 @@ export class AuthService {
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   // API call to refresh token
-  refreshToken(refreshToken: string): Observable<{ accessToken: string; refreshToken: string }> {
-    return this.http.post<{ accessToken: string; refreshToken: string }>(
+  refreshToken(refreshToken: string): Observable<{ data: { access_token: string; refresh_token: string } }> {
+    return this.http.post<{ data: { access_token: string; refresh_token: string } }>(
       `${this.apiUrl}/refresh-token`,
-      { refreshToken }
+      { refresh_token: refreshToken }
     ).pipe(
       tap((tokens) => {
-        this.tokenService.setAccessToken(tokens.accessToken);
-        this.tokenService.setRefreshToken(tokens.refreshToken);
+        this.tokenService.setAccessToken(tokens.data.access_token);
+        this.tokenService.setRefreshToken(tokens.data.refresh_token).then(() => {});
       })
     );
   }
 
   // Login and save tokens
   login(credentials: { credential: string; password: string; remember: boolean }) {
-    return this.http.post<{ accessToken: string; refreshToken: string }>(
+    return this.http.post<{ data: { access_token: string; refresh_token: string } }>(
       `${this.apiUrl}/login`,
       credentials
     ).pipe(
       tap((tokens) => {
-        this.tokenService.setAccessToken(tokens.accessToken);
-        this.tokenService.setRefreshToken(tokens.refreshToken);
+        console.log("login", tokens)
+        this.tokenService.setAccessToken(tokens.data.access_token);
+        this.tokenService.setRefreshToken(tokens.data.refresh_token).then(() => {});
       })
+    );
+  }
+
+  getProfile() {
+    return this.http.get(
+      `${this.apiUrl}/profile`
     );
   }
 
   // Logout and clear tokens
   logout() {
-    this.tokenService.clearAccessToken();
-    this.tokenService.clearRefreshToken();
+    return this.http.post<{ status_code: number; message: string }>(
+      `${this.apiUrl}/logout`,
+      null,
+    ).pipe(
+      tap(() => {
+        this.tokenService.clearAccessToken();
+        this.tokenService.clearRefreshToken().then(() => {});
+      })
+    );
   }
 }

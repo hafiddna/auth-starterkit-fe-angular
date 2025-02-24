@@ -1,23 +1,21 @@
-import {
-  ApplicationConfig,
-  provideZoneChangeDetection,
-  importProvidersFrom,
-} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
 import {
   HttpClient,
-  provideHttpClient, withInterceptors,
+  provideHttpClient,
   withInterceptorsFromDi,
+  withInterceptors,
+  HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { routes } from './app.routes';
-import {
-  provideRouter,
-  withComponentInputBinding,
-  withInMemoryScrolling,
-} from '@angular/router';
+import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideClientHydration } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// toastr
+import { ToastrModule } from 'ngx-toastr';
+import { provideToastr } from 'ngx-toastr';
 
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -29,7 +27,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 //Import all material modules
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { authInterceptor } from "./auth.interceptor";
+
+import { AuthInterceptor } from './auth.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +36,8 @@ export function HttpLoaderFactory(http: HttpClient): any {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimationsAsync(),
+    provideToastr(), // Toastr providers
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       routes,
@@ -46,12 +47,14 @@ export const appConfig: ApplicationConfig = {
       }),
       withComponentInputBinding()
     ),
-    provideHttpClient(withInterceptorsFromDi()),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(
+      withInterceptorsFromDi(),
+    ),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideClientHydration(),
-    provideAnimationsAsync(),
     importProvidersFrom(
       FormsModule,
+      ToastrModule.forRoot(),
       ReactiveFormsModule,
       MaterialModule,
       TablerIconsModule.pick(TablerIcons),

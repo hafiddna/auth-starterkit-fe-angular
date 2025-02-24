@@ -1,33 +1,63 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
-import { MaterialModule } from 'src/app/material.module';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrandingComponent } from 'src/app/layouts/full/vertical/sidebar/branding.component';
+import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { TranslateModule } from "@ngx-translate/core";
+import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { tap, catchError, throwError } from 'rxjs';
+import { MaterialModule } from "../../../material.module";
+import { BrandingComponent } from "../../../layouts/full/vertical/sidebar/branding.component";
+import { AuthService } from "../../../services/auth.service";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-side-login',
-  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule, BrandingComponent, TranslateModule],
+  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule, BrandingComponent, TranslateModule, CommonModule, ToastrModule],
   templateUrl: './side-login.component.html',
+  providers: [ToastrService]
 })
 export class AppSideLoginComponent {
+  appName = environment.appName;
 
-  constructor( private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private toastr: ToastrService,
+    private route: ActivatedRoute
+  ) {}
 
   form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    credential: new FormControl('', [Validators.required, Validators.minLength(6)]),
     password: new FormControl('', [Validators.required]),
+    remember: new FormControl(false),
   });
+
+  hide = signal(true);
+
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
+  }
 
   get f() {
     return this.form.controls;
   }
 
   submit() {
-    // console.log(this.form.value);
-    this.router.navigate(['/dashboard']);
+    this.authService.login(this.form.value as { credential: string; password: string; remember: boolean }).pipe(
+      tap(() => {
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+        this.router.navigate([returnUrl]).then(() => {});
+      }),
+      catchError((error) => {
+        if (error.status === 401) {
+          this.toastr.error('Invalid credentials', 'Error');
+        } else if (error.status === 429) {
+          // TODO: Handle rate limit error
+        }
+
+        return throwError(error);
+      })
+    ).subscribe();
   }
 }

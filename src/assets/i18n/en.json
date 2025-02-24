@@ -29,5 +29,13 @@
   "Create an account": "Create an account",
   "Already have an Account?": "Already have an Account?",
   "Sign In": "Sign In",
-  "Sign Up": "Sign Up"
+  "Sign Up": "Sign Up",
+  "Welcome to": "Welcome to",
+  "Credentials": "Credentials",
+  "Password": "Password",
+  "is required": "is required",
+  "should be at least": "should be at least",
+  "characters": "characters",
+  "Your Admin Dashboard": "Your Admin Dashboard",
+  "New to": "New to"
 }

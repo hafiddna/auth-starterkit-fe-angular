@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CoreService {
+  // TODO: Get from localstorage first, if there is no value, get from defaults
   private optionsSignal = signal<AppSettings>(defaults);
   private notify$ = new BehaviorSubject<Record<string, any>>({});
 
@@ -29,7 +30,7 @@ export class CoreService {
       ...options,
     }));
     this.notify$.next(this.optionsSignal);
-    
+
   }
 
   setLanguage(lang: string) {
