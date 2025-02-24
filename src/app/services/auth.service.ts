@@ -34,7 +34,6 @@ export class AuthService {
       credentials
     ).pipe(
       tap((tokens) => {
-        console.log("login", tokens)
         this.tokenService.setAccessToken(tokens.data.access_token);
         this.tokenService.setRefreshToken(tokens.data.refresh_token).then(() => {});
       })
