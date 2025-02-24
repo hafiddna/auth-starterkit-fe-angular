@@ -15,6 +15,7 @@ export class AuthService {
   // API call to refresh token
   refreshToken(refreshToken: string): Observable<{ data: { access_token: string; refresh_token: string } }> {
     return this.http.post<{ data: { access_token: string; refresh_token: string } }>(
+      // TODO: Decrypt data on production
       `${this.apiUrl}/refresh-token`,
       { refresh_token: refreshToken }
     ).pipe(
@@ -28,6 +29,7 @@ export class AuthService {
   // Login and save tokens
   login(credentials: { credential: string; password: string; remember: boolean }) {
     return this.http.post<{ data: { access_token: string; refresh_token: string } }>(
+      // TODO: Decrypt data on production
       `${this.apiUrl}/login`,
       credentials
     ).pipe(
