@@ -1,22 +1,19 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  Input,
-  signal,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, Output, EventEmitter, Input, ViewEncapsulation } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
 import { navItems } from '../sidebar/sidebar-data';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AppSettings } from 'src/app/config';
+import { Observable } from 'rxjs';
+import { UserProfile } from 'src/app/interfaces/user-profile';
+import { map } from "rxjs/operators";
+import { AuthService } from 'src/app/services/auth.service';
 
 interface notifications {
   id: number;
@@ -68,6 +65,7 @@ export class HeaderComponent {
   @Output() toggleCollapsed = new EventEmitter<void>();
 
 
+  profile$!: Observable<UserProfile>
   showFiller = false;
 
   public selectedLanguage: any = {
@@ -97,10 +95,14 @@ export class HeaderComponent {
     private settings: CoreService,
     private vsidenav: CoreService,
     public dialog: MatDialog,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService,
+    private router: Router
   ) {
     translate.setDefaultLang('en');
-
+    this.profile$ = this.authService.getProfile().pipe(
+      map((response) => response.data)
+    );
   }
 
   options = this.settings.getOptions();
@@ -273,6 +275,12 @@ export class HeaderComponent {
       link: '/',
     },
   ];
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/login']).then(() => {});
+    });
+  }
 }
 
 @Component({

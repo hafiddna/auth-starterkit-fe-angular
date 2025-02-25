@@ -9,14 +9,31 @@ export const navItems: NavItem[] = [
     iconName: 'home',
     route: '/dashboard',
   },
-  // {
-  //   displayName: 'Login',
-  //   iconName: 'lock',
-  //   route: '/login',
-  // },
-  // {
-  //   navCap: 'Other',
-  // },
+  {
+    navCap: 'Apps',
+  },
+  {
+    displayName: 'User Management',
+    iconName: 'users-group',
+    route: '/user-management/users',
+    children: [
+      {
+        displayName: 'Users',
+        iconName: 'users',
+        route: '/user-management/users',
+      },
+      {
+        displayName: 'Roles',
+        iconName: 'certificate',
+        route: '/user-management/roles',
+      },
+      {
+        displayName: 'Permissions',
+        iconName: 'shield-check',
+        route: '/user-management/permissions',
+      }
+    ]
+  }
   // {
   //   displayName: 'Menu Level',
   //   iconName: 'box-multiple',

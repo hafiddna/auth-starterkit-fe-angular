@@ -1,17 +1,17 @@
 import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { CoreService } from 'src/app/services/core.service';
 import { AppSettings } from 'src/app/config';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { navItems } from './vertical/sidebar/sidebar-data';
 import { NavService } from '../../services/nav.service';
 import { AppNavItemComponent } from './vertical/sidebar/nav-item/nav-item.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { SidebarComponent } from './vertical/sidebar/sidebar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -20,6 +20,8 @@ import { AppHorizontalHeaderComponent } from './horizontal/header/header.compone
 import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.component';
 import { AppBreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
+import { UserProfile } from "../../interfaces/user-profile";
+import { AuthService } from 'src/app/services/auth.service';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -42,27 +44,29 @@ interface quicklinks {
 }
 
 @Component({
-    selector: 'app-full',
-    imports: [
-        RouterModule,
-        AppNavItemComponent,
-        MaterialModule,
-        CommonModule,
-        SidebarComponent,
-        NgScrollbarModule,
-        TablerIconsModule,
-        HeaderComponent,
-        AppHorizontalHeaderComponent,
-        AppHorizontalSidebarComponent,
-        AppBreadcrumbComponent,
-        CustomizerComponent,
-    ],
-    templateUrl: './full.component.html',
-    styleUrls: [],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-full',
+  imports: [
+    AsyncPipe,
+    RouterModule,
+    AppNavItemComponent,
+    MaterialModule,
+    CommonModule,
+    SidebarComponent,
+    NgScrollbarModule,
+    TablerIconsModule,
+    HeaderComponent,
+    AppHorizontalHeaderComponent,
+    AppHorizontalSidebarComponent,
+    AppBreadcrumbComponent,
+    CustomizerComponent,
+  ],
+  templateUrl: './full.component.html',
+  styleUrls: [],
+  encapsulation: ViewEncapsulation.None
 })
-export class FullComponent implements OnInit {
+export class FullComponent implements OnDestroy {
   navItems = navItems;
+  profile$!: Observable<UserProfile>
 
   @ViewChild('leftsidenav')
   public sidenav: MatSidenav;
@@ -192,7 +196,8 @@ export class FullComponent implements OnInit {
     private mediaMatcher: MediaMatcher,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-    private navService: NavService
+    private navService: NavService,
+    private authService: AuthService
   ) {
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
@@ -217,9 +222,11 @@ export class FullComponent implements OnInit {
       .subscribe((e) => {
         this.content.scrollTo({ top: 0 });
       });
-  }
 
-  ngOnInit(): void {}
+    this.profile$ = this.authService.getProfile().pipe(
+      map((response) => response.data)
+    );
+  }
 
   ngOnDestroy() {
     this.layoutChangesSubscription.unsubscribe();
@@ -273,5 +280,11 @@ export class FullComponent implements OnInit {
 
     // Add the selected theme class
     this.htmlElement.classList.add(options.activeTheme);
+  }
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/login']).then(() => {});
+    });
   }
 }

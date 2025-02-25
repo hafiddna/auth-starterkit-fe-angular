@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { TokenService } from "./token.service";
 import { environment } from "../../environments/environment";
+import { UserProfile } from "../interfaces/user-profile";
+import { BaseResponse } from "../interfaces/base-response";
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +42,8 @@ export class AuthService {
     );
   }
 
-  getProfile() {
-    return this.http.get(
-      `${this.apiUrl}/profile`
-    );
+  getProfile(): Observable<BaseResponse<UserProfile>> {
+    return this.http.get<BaseResponse<UserProfile>>(`${this.apiUrl}/profile`)
   }
 
   // Logout and clear tokens

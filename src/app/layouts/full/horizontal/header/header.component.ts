@@ -2,13 +2,18 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
 import { navItems } from '../../vertical/sidebar/sidebar-data';
-import { TranslateService } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Router, RouterModule } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { BrandingComponent } from '../../vertical/sidebar/branding.component';
 import { AppSettings } from 'src/app/config';
 import { FormsModule } from '@angular/forms';
+import { Observable } from "rxjs";
+import { UserProfile } from "../../../../interfaces/user-profile";
+import { map } from "rxjs/operators";
+import { AuthService } from 'src/app/services/auth.service';
+import { AsyncPipe, NgIf } from "@angular/common";
 
 interface notifications {
   id: number;
@@ -41,7 +46,7 @@ interface quicklinks {
 
 @Component({
   selector: 'app-horizontal-header',
-  imports: [RouterModule, TablerIconsModule, MaterialModule, BrandingComponent],
+  imports: [RouterModule, TablerIconsModule, MaterialModule, BrandingComponent, AsyncPipe, NgIf, TranslateModule],
   templateUrl: './header.component.html',
 })
 export class AppHorizontalHeaderComponent {
@@ -50,6 +55,8 @@ export class AppHorizontalHeaderComponent {
   @Output() toggleMobileNav = new EventEmitter<void>();
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
+
+  profile$!: Observable<UserProfile>
 
   showFiller = false;
 
@@ -80,9 +87,14 @@ export class AppHorizontalHeaderComponent {
     private settings: CoreService,
     private vsidenav: CoreService,
     public dialog: MatDialog,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService,
+    private router: Router
   ) {
     translate.setDefaultLang('en');
+    this.profile$ = this.authService.getProfile().pipe(
+      map((response) => response.data)
+    );
   }
 
   openDialog() {
@@ -150,20 +162,20 @@ export class AppHorizontalHeaderComponent {
       subtitle: 'Account Settings',
       link: '/',
     },
-    {
-      id: 2,
-      img: '/assets/images/svgs/icon-inbox.svg',
-      title: 'My Inbox',
-      subtitle: 'Messages & Email',
-      link: '/',
-    },
-    {
-      id: 3,
-      img: '/assets/images/svgs/icon-tasks.svg',
-      title: 'My Tasks',
-      subtitle: 'To-do and Daily Tasks',
-      link: '/',
-    },
+    // {
+    //   id: 2,
+    //   img: '/assets/images/svgs/icon-inbox.svg',
+    //   title: 'My Inbox',
+    //   subtitle: 'Messages & Email',
+    //   link: '/',
+    // },
+    // {
+    //   id: 3,
+    //   img: '/assets/images/svgs/icon-tasks.svg',
+    //   title: 'My Tasks',
+    //   subtitle: 'To-do and Daily Tasks',
+    //   link: '/',
+    // },
   ];
 
   apps: apps[] = [
@@ -267,6 +279,12 @@ export class AppHorizontalHeaderComponent {
       link: '/',
     },
   ];
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/login']).then(() => {});
+    });
+  }
 }
 
 @Component({

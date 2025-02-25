@@ -224,18 +224,23 @@
         <h6 class="f-s-16 f-w-600 m-0 ">{{ "User Profile" | translate }}</h6>
 
         <div class="d-flex align-items-center p-b-24 b-b-1 m-t-16">
-          <img
-            src="/assets/images/profile/user-1.jpg"
-            class="rounded-circle"
-            width="95"
-          />
+          <ng-container *ngIf="profile$ | async as profile">
+            <img
+              alt="profile"
+              [src]="profile.avatar == '' ? '/assets/images/profile/user-1.jpg' : profile.avatar"
+              class="rounded-circle"
+              width="95"
+            />
+          </ng-container>
           <div class="m-l-16">
-            <h6 class="f-s-14 f-w-600 m-0 ">Mathew Anderson</h6>
-            <span class="f-s-14 d-block m-b-4">Designer</span>
-            <span class="d-flex align-items-center">
-              <i-tabler name="mail" class="icon-15 m-r-4"></i-tabler>
-              info&#64;hafiddna.vercel.app
-            </span>
+            <ng-container *ngIf="profile$ | async as profile">
+              <h6 class="f-s-14 f-w-600 m-0 ">{{ profile.full_name }}</h6>
+              <span class="f-s-14 d-block m-b-4">Designer</span>
+              <span class="d-flex align-items-center">
+                <i-tabler [name]="profile.email ? 'mail' : 'phone'" class="icon-15 m-r-4"></i-tabler>
+                {{ profile.email ?? profile.phone }}
+              </span>
+            </ng-container>
           </div>
         </div>
       </div>
@@ -267,12 +272,12 @@
       </div>
 
       <div class="p-y-12 p-x-32">
-        <a
-          [routerLink]="['/login']"
+        <button
+          (click)="logout()"
           mat-stroked-button
           color="primary"
           class="w-100"
-          >{{ "Logout" | translate }}</a
+          >{{ "Logout" | translate }}</button
         >
       </div>
     </ng-scrollbar>

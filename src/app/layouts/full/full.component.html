@@ -40,26 +40,32 @@
       </ng-scrollbar>
       <div class="p-24 m-t-auto profile-bar">
         <div class="bg-light-secondary d-flex align-items-center rounded p-16">
-          <img
-            src="/assets/images/profile/user-1.jpg"
-            class="rounded-circle"
-            width="40"
-          />
+          <ng-container *ngIf="profile$ | async as profile">
+            <img
+              alt="profile"
+              [src]="profile.avatar == '' ? '/assets/images/profile/user-1.jpg' : profile.avatar"
+              class="rounded-circle"
+              width="40"
+            />
+          </ng-container>
           <div class="m-l-16">
-            <h4 class="f-w-600">Mathew</h4>
-            <span class="f-s-12">Designer</span>
+            <ng-container *ngIf="profile$ | async as profile">
+<!--              TODO: Make this ellipsis-->
+              <h4 class="f-w-600">{{ profile.nick_name }}</h4>
+              <span class="f-s-12">Designer</span>
+            </ng-container>
           </div>
           <div class="m-l-auto">
-            <a
+            <button
               mat-icon-button
-              [routerLink]="['/login']"
+              (click)="logout()"
               class="d-flex justify-content-center"
             >
               <i-tabler
                 name="power"
                 class="text-primary icon-18 d-flex"
               ></i-tabler>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -89,26 +95,32 @@
     </ng-scrollbar>
     <div class="p-24 m-t-auto profile-bar">
       <div class="bg-light-secondary d-flex align-items-center rounded p-16">
-        <img
-          src="/assets/images/profile/user-1.jpg"
-          class="rounded-circle"
-          width="40"
-        />
+        <ng-container *ngIf="profile$ | async as profile">
+          <img
+            alt="profile"
+            [src]="profile.avatar == '' ? '/assets/images/profile/user-1.jpg' : profile.avatar"
+            class="rounded-circle"
+            width="40"
+          />
+        </ng-container>
         <div class="m-l-16">
-          <h4 class="f-w-600">Mathew</h4>
-          <span class="f-s-12">Designer</span>
+          <ng-container *ngIf="profile$ | async as profile">
+<!--            TODO: Make this ellipsis-->
+            <h4 class="f-w-600">{{ profile.nick_name }}</h4>
+            <span class="f-s-12">Designer</span>
+          </ng-container>
         </div>
         <div class="m-l-auto">
-          <a
+          <button
             mat-icon-button
-            [routerLink]="['/login']"
             class="d-flex justify-content-center"
+            (click)="logout()"
           >
             <i-tabler
               name="power"
               class="text-primary icon-18 d-flex"
             ></i-tabler>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -239,7 +251,7 @@
                   mat-mini-fab
                   class="text-primary bg-light shadow-none rounded"
                 >
-                  <img [src]="appdd.img" width="20" />
+                  <img [src]="appdd.img" width="20" alt="app" />
                 </button>
 
                 <div>
