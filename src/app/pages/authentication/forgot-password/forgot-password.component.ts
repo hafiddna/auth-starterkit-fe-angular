@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './forgot-password.component.html'
 })
-export class ForgotPasswordComponent {
+export class AppForgotPasswordComponent {
 
 }

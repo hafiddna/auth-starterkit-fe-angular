@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-
 import { AppErrorComponent } from './error/error.component';
+import { AppForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { AppSideLoginComponent } from './side-login/side-login.component';
 import { AppSideRegisterComponent } from './side-register/side-register.component';
 
@@ -10,18 +10,21 @@ export const AuthenticationRoutes: Routes = [
     children: [
       {
         path: 'error',
-        component: AppErrorComponent,
+        component: AppErrorComponent
       },
 
       {
         path: 'login',
-        component: AppSideLoginComponent,
+        component: AppSideLoginComponent
       },
       {
         path: 'register',
-        component: AppSideRegisterComponent,
+        component: AppSideRegisterComponent
       },
-      // TODO: Add forgot password route
+      {
+        path: 'forgot-password',
+        component: AppForgotPasswordComponent
+      },
     ],
   },
 ];
