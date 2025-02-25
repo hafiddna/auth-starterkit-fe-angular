@@ -59,7 +59,7 @@
               <!-- email -->
               <mat-label class=" f-s-14 f-w-600 m-b-12 d-block">{{ "Credentials" | translate }}</mat-label>
               <mat-form-field appearance="outline" class="w-100" color="primary">
-                <input matInput type="email" formControlName="email" />
+                <input matInput formControlName="email" />
                 @if(f['email'].touched && f['email'].invalid){
                   <mat-hint class="m-b-16 error-msg">
                     @if(f['email'].errors && f['email'].errors['required']){
@@ -73,7 +73,19 @@
               <!-- password -->
               <mat-label class=" f-s-14 f-w-600 m-b-12 d-block">{{ "Password" | translate }}</mat-label>
               <mat-form-field appearance="outline" class="w-100" color="primary">
-                <input matInput type="password" formControlName="password" />
+                <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="clickEvent($event)"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide()"
+                  type="button"
+                >
+                  <mat-icon
+                    size="small"
+                  >{{hide() ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </button>
                 @if(f['password'].touched && f['password'].invalid){
                   <mat-hint class="m-b-16 error-msg">
                     @if(f['password'].errors && f['password'].errors['required']){

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from "@ngx-translate/core";
@@ -24,6 +24,13 @@ export class AppSideRegisterComponent {
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
+
+  hide = signal(true);
+
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
+  }
 
   get f() {
     return this.form.controls;
