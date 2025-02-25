@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { BrandingComponent } from 'src/app/layouts/full/vertical/sidebar/branding.component';
 import { TranslateModule } from "@ngx-translate/core";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-side-register',
@@ -14,6 +15,8 @@ import { TranslateModule } from "@ngx-translate/core";
   templateUrl: './side-register.component.html',
 })
 export class AppSideRegisterComponent {
+  appName = environment.appName;
+
   options = this.settings.getOptions();
 
   constructor(private settings: CoreService, private router: Router) {}
@@ -29,7 +32,6 @@ export class AppSideRegisterComponent {
   }
 
   submit() {
-    // console.log(this.form.value);
     this.router.navigate(['/']);
   }
 }

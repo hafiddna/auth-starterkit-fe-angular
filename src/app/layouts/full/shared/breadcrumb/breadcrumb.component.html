@@ -13,10 +13,10 @@
                 <li class="breadcrumb-item" [routerLink]="url.url">
                   <a [routerLink]="url.url">{{ url.title | translate }}</a>
                 </li>
-              } @else {
                 <li class="breadcrumb-item">
                   <i-tabler name="circle-filled" class="icon-8"></i-tabler>
                 </li>
+              } @else {
                 <li class="breadcrumb-item active f-s-14">{{ url.title | translate }}</li>
               }
             }

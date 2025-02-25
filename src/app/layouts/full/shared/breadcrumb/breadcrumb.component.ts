@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { Router, NavigationEnd, ActivatedRoute, Data } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { TranslateModule } from "@ngx-translate/core";
+import { environment } from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-breadcrumb',
@@ -35,7 +36,7 @@ export class AppBreadcrumbComponent {
       .pipe(filter((route) => route.outlet === 'primary'))
       .pipe(mergeMap((route) => route.data))
       .subscribe((event) => {
-        this.titleService.setTitle(event['title'] + ' - Auth Starterkit');
+        this.titleService.setTitle(event['title'] + ' | ' + environment.appName);
         this.pageInfo = event;
       });
   }

@@ -1,6 +1,6 @@
 @if(!item.navCap){
 <a class="cursor-pointer menuLink" (click)="onItemSelected(item)" [ngClass]="{
-    activeMenu: item.route ? router.isActive(item.route, true) : false
+    activeMenu: item.route ? router.isActive(item.route, false) : false
   }">
   <i-tabler class="routeIcon icon-18" name="{{ item.iconName }}"></i-tabler>
   {{ item.displayName }}

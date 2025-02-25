@@ -15,7 +15,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'User Management',
     iconName: 'users-group',
-    route: '/user-management/users',
+    route: '/user-management',
     children: [
       {
         displayName: 'Users',

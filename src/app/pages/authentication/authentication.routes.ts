@@ -21,6 +21,7 @@ export const AuthenticationRoutes: Routes = [
         path: 'register',
         component: AppSideRegisterComponent,
       },
+      // TODO: Add forgot password route
     ],
   },
 ];
