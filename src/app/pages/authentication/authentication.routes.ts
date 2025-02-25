@@ -28,7 +28,7 @@ export const AuthenticationRoutes: Routes = [
         component: AppForgotPasswordComponent
       },
       {
-        path: 'chage-password/:token',
+        path: 'change-password/:token',
         component: AppChangePasswordComponent
       },
       {
