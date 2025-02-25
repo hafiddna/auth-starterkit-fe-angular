@@ -1,11 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
-import {
-  HttpClient,
-  provideHttpClient,
-  withInterceptorsFromDi,
-  withInterceptors,
-  HTTP_INTERCEPTORS
-} from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { Router, NavigationEnd, ActivatedRoute, Data } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs/operators';
-import { TablerIconsModule } from 'angular-tabler-icons';
+import { Router, NavigationEnd, ActivatedRoute, Data, RouterModule } from '@angular/router';
 import { TranslateModule } from "@ngx-translate/core";
+import { TablerIconsModule } from 'angular-tabler-icons';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { environment } from "../../../../../environments/environment";
 
 @Component({

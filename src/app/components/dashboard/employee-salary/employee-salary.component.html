@@ -1,0 +1,50 @@
+<mat-card class="cardWithShadow">
+  <mat-card-header>
+    <mat-card-title>{{ "Employee Salary" | translate }}</mat-card-title>
+    <mat-card-subtitle>{{ "Every month" | translate }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- ---------------------------- -->
+    <!-- charts here -->
+    <!-- ---------------------------- -->
+    <apx-chart
+      [series]="employeeChart.series"
+      [plotOptions]="employeeChart.plotOptions"
+      [dataLabels]="employeeChart.dataLabels"
+      [chart]="employeeChart.chart"
+      [legend]="employeeChart.legend"
+      [colors]="employeeChart.colors"
+      [tooltip]="employeeChart.tooltip"
+      [xaxis]="employeeChart.xaxis"
+      [yaxis]="employeeChart.yaxis"
+      [grid]="employeeChart.grid"
+    ></apx-chart>
+
+    <div class="d-flex align-items-center justify-content-between m-t-16">
+      <div class="d-flex align-items-center">
+        <span
+          class="text-primary bg-light-primary rounded icon-40 d-flex align-items-center justify-content-center"
+        >
+          <i-tabler name="grid-dots" class="icon-20"></i-tabler>
+        </span>
+
+        <div class="m-l-12">
+          <span class="f-s-14">{{ "Salary" | translate }}</span>
+          <h5 class="f-s-16 f-w-600 m-t-4">$36,358</h5>
+        </div>
+      </div>
+      <div class="d-flex align-items-center">
+        <span
+          class="bg-light text-body rounded icon-40 d-flex align-items-center justify-content-center"
+        >
+          <i-tabler name="grid-dots" class="icon-20"></i-tabler>
+        </span>
+
+        <div class="m-l-12">
+          <span class="f-s-14">{{ "Profit" | translate }}</span>
+          <h5 class="f-s-16 f-w-600 m-t-4">$5,296</h5>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

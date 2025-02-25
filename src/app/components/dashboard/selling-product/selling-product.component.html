@@ -1,0 +1,50 @@
+<mat-card class="shadow-none bg-primary">
+  <mat-card-content class="p-t-32">
+    <mat-card-title class="text-white">{{ "Best selling products" | translate }}</mat-card-title>
+    <mat-card-subtitle class="text-white">{{ "Overview" | translate }} 2025</mat-card-subtitle>
+    <div class="text-center">
+      <img
+        src="assets/images/backgrounds/piggy.png"
+        alt="image"
+        width="300"
+        class="m-t-18 minus-img"
+      />
+    </div>
+  </mat-card-content>
+  <mat-card class="shadow-none m-12">
+    <mat-card-content>
+      <div class="d-flex align-items-center m-b-8">
+        <div class="m-r-auto">
+          <h6 class="f-s-16 f-w-600 m-b-4">MaterialPro</h6>
+          <span class="f-s-14 f-w-400">$23,568</span>
+        </div>
+        <span
+          class="bg-light-primary text-primary rounded f-w-600 p-4 f-s-12 p-x-12"
+        >
+          55%
+        </span>
+      </div>
+      <mat-progress-bar
+        mode="determinate"
+        value="55"
+        class="rounded"
+      ></mat-progress-bar>
+      <div class="d-flex align-items-center m-b-8 m-t-16">
+        <div class="m-r-auto">
+          <h6 class="f-s-16 f-w-600 m-b-4">Flexy Admin</h6>
+          <span class="f-s-14 f-w-400">$23,568</span>
+        </div>
+        <span
+          class="bg-light-secondary text-secondary rounded f-w-600 p-4 f-s-12 p-x-12"
+        >
+          20%
+        </span>
+      </div>
+      <mat-progress-bar
+        mode="determinate"
+        value="20"
+        class="rounded bg-secondary"
+      ></mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
+</mat-card>

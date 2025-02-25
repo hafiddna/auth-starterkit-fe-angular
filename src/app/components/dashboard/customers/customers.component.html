@@ -1,0 +1,31 @@
+<!-- Customers -->
+<mat-card class="cardWithShadow overflow-hidden">
+  <mat-card-content>
+    <mat-card-subtitle class="p-b-4">{{ "Customers" | translate }}</mat-card-subtitle>
+    <h5 class="f-s-21 m-t-4 f-w-600">36,358</h5>
+
+    <div class="d-flex align-items-center m-t-16">
+      <button
+        mat-mini-fab
+        class="bg-light-error text-error shadow-none icon-27"
+      >
+        <i-tabler name="arrow-down-left" class="icon-20 d-flex"></i-tabler>
+      </button>
+      <div class="f-s-14 f-w-600 m-l-12">+9%</div>
+    </div>
+  </mat-card-content>
+  <!-- ---------------------------- -->
+  <!-- charts here -->
+  <!-- ---------------------------- -->
+  <apx-chart
+    [series]="customerChart.series"
+    [dataLabels]="customerChart.dataLabels"
+    [chart]="customerChart.chart"
+    [legend]="customerChart.legend"
+    [colors]="customerChart.colors"
+    [stroke]="customerChart.stroke"
+    [tooltip]="customerChart.tooltip"
+    [plotOptions]="customerChart.plotOptions"
+    [responsive]="customerChart.responsive"
+  ></apx-chart>
+</mat-card>

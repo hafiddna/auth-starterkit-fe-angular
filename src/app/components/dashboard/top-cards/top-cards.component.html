@@ -1,0 +1,22 @@
+<div class="row">
+  @for(topcard of topcards; track topcard.title) {
+    <div class="col-lg-2 col-sm-4 col-6">
+      <mat-card class="shadow-none text-center bg-light-{{ topcard.color }}">
+        <mat-card-content>
+          <img
+            [src]="topcard.img"
+            alt="users"
+            width="40"
+            class="rounded-circle"
+          />
+          <h4 class="f-s-14 f-w-600 text-{{ topcard.color }} m-t-8">
+            {{ topcard.title | translate }}
+          </h4>
+          <h6 class="f-s-21 f-w-600 text-{{ topcard.color }} m-t-8">
+            {{ topcard.subtitle }}
+          </h6>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+</div>
