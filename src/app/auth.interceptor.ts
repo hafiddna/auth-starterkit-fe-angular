@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
-import { TokenService } from './services/token.service';
-import { AuthService } from './services/auth.service';
 import { Observable, catchError, throwError, switchMap, from } from 'rxjs';
+import { AuthService } from './services/auth.service';
+import { CoreService } from "./services/core.service";
+import { TokenService } from './services/token.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
+  private options = this.settings.getOptions();
 
-  constructor(private tokenService: TokenService, private authService: AuthService) {}
+  constructor(
+    private tokenService: TokenService,
+    private authService: AuthService,
+    private settings: CoreService
+  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     let appId = localStorage.getItem('appId');
@@ -38,7 +44,10 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     req = req.clone({
-      setHeaders: { 'X-Device-Type': deviceType },
+      setHeaders: {
+        'X-Device-Type': deviceType,
+        'Accept-Language': this.options.language,
+      },
     });
 
     let accessToken = this.tokenService.getAccessToken();

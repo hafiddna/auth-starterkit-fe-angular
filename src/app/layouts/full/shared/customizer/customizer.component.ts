@@ -17,7 +17,6 @@ import { TranslateModule } from "@ngx-translate/core";
   selector: 'app-customizer',
   imports: [TablerIconsModule, MaterialModule, FormsModule, NgScrollbarModule, TranslateModule],
   templateUrl: './customizer.component.html',
-  styleUrls: ['./customizer.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomizerComponent {
@@ -26,9 +25,8 @@ export class CustomizerComponent {
   @Output() optionsChange = new EventEmitter<AppSettings>();
   hideSingleSelectionIndicator = signal(true);
 
-  constructor(private settings: CoreService) {
+  constructor(private settings: CoreService) {}
 
-  }
   setDark(theme: string) {
     this.settings.setOptions({ theme: theme });
     this.emitOptions();
@@ -45,9 +43,23 @@ export class CustomizerComponent {
     this.emitOptions();
   }
 
-
   setSidebar(sidenavOpened: boolean) {
     this.settings.setOptions({ sidenavOpened: sidenavOpened });
+    this.emitOptions();
+  }
+
+  setLayout(horizontal: boolean) {
+    this.settings.setOptions({ horizontal: horizontal });
+    this.emitOptions();
+  }
+
+  setCardBoder(cardBorder: boolean) {
+    this.settings.setOptions({ cardBorder: cardBorder });
+    this.emitOptions();
+  }
+
+  setBoxed(boxed: boolean) {
+    this.settings.setOptions({ boxed: boxed });
     this.emitOptions();
   }
 

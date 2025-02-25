@@ -85,6 +85,7 @@ export class HeaderComponent {
     {
       language: 'Indonesia',
       code: 'id',
+      type: 'ID',
       icon: '/assets/images/flag/icon-flag-id.png',
     }
   ];
@@ -93,13 +94,17 @@ export class HeaderComponent {
 
   constructor(
     private settings: CoreService,
-    private vsidenav: CoreService,
     public dialog: MatDialog,
     private translate: TranslateService,
     private authService: AuthService,
     private router: Router
   ) {
-    translate.setDefaultLang('en');
+    translate.setDefaultLang(this.options.language);
+    this.languages.forEach((lang) => {
+      if (lang.code === this.options.language.split('_')[0]) {
+        this.selectedLanguage = lang;
+      }
+    });
     this.profile$ = this.authService.getProfile().pipe(
       map((response) => response.data)
     );
@@ -117,8 +122,10 @@ export class HeaderComponent {
   }
 
   changeLanguage(lang: any): void {
-    this.translate.use(lang.code);
+    this.translate.use(`${lang.code}_${lang.type}`);
     this.selectedLanguage = lang;
+    this.options.language = `${lang.code}_${lang.type}`;
+    this.emitOptions();
   }
 
   setlightDark(theme: string) {
@@ -129,6 +136,7 @@ export class HeaderComponent {
 
   private emitOptions() {
     this.optionsChange.emit(this.options);
+    this.settings.setOptions(this.options);
   }
 
   notifications: notifications[] = [

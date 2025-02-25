@@ -37,5 +37,9 @@
   "should be at least": "harus setidaknya",
   "characters": "karakter",
   "Your Admin Dashboard": "Dasbor Admin Anda",
-  "New to": "Baru di"
+  "New to": "Baru di",
+  "User Management": "Manajemen Pengguna",
+  "Users": "Pengguna",
+  "Roles": "Peran",
+  "Permissions": "Izin"
 }

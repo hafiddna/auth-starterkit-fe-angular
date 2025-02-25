@@ -12,6 +12,11 @@ export class CoreService {
 
   constructor() {
     this.notify$.next(this.optionsSignal());
+
+    const options = localStorage.getItem('options');
+    if (options) {
+      this.optionsSignal = signal<AppSettings>(JSON.parse(options));
+    }
   }
 
   // Observable for notification updates
@@ -29,6 +34,7 @@ export class CoreService {
       ...current,
       ...options,
     }));
+    localStorage.setItem('options', JSON.stringify(this.optionsSignal()));
     this.notify$.next(this.optionsSignal);
 
   }

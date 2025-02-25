@@ -2,8 +2,7 @@
   <ng-scrollbar class="position-relative" style="height: calc(100vh - 50px)">
     <div class="p-24">
       <h6 class="f-s-16 f-w-600  f-s-16 m-b-16">{{ "Theme Option" | translate }}</h6>
-      <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="options.theme" (change)="setDark($event.value)"
-        class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
+      <mat-button-toggle-group (change)="setDark($event.value)" #group="matButtonToggleGroup" [(ngModel)]="options.theme" class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
         <mat-button-toggle [value]="'light'">
           <div class="d-flex align-items-center f-w-500">
             <i-tabler name="sun-high" class="d-flex m-r-8 fill-icon"></i-tabler>
@@ -22,43 +21,35 @@
         <h6 class="f-s-16 f-w-600  f-s-16 m-b-16 m-t-24 p-t-16">
           {{ "Theme Colors" | translate }}
         </h6>
-        <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="options.activeTheme"
-          (change)="setColor($event.value)" class="customizer-button-group theme-colors two-row"
-          [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
+        <mat-button-toggle-group (change)="setColor($event.value)" #group="matButtonToggleGroup" [(ngModel)]="options.activeTheme" class="customizer-button-group theme-colors two-row" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
           <mat-button-toggle [value]="'blue_theme'">
-            <span class="theme-circle blue_theme" matTooltip="blue_theme" matTooltipClass="text-uppercase"
-              matTooltipPosition="above">
+            <span class="theme-circle blue_theme" matTooltip="blue theme" matTooltipClass="text-capitalize" matTooltipPosition="above">
               <i-tabler name="check" class="icon-16 theme-icon"></i-tabler>
             </span>
           </mat-button-toggle>
           <mat-button-toggle [value]="'aqua_theme'">
-            <span class="theme-circle aqua_theme" matTooltip="aqua_theme" matTooltipClass="text-uppercase"
-              matTooltipPosition="above">
+            <span class="theme-circle aqua_theme" matTooltip="aqua theme" matTooltipClass="text-capitalize" matTooltipPosition="above">
               <i-tabler name="check" class="icon-16 theme-icon"></i-tabler>
             </span>
           </mat-button-toggle>
           <mat-button-toggle [value]="'purple_theme'">
-            <span class="theme-circle purple_theme" matTooltip="purple_theme" matTooltipClass="text-uppercase"
-              matTooltipPosition="above">
+            <span class="theme-circle purple_theme" matTooltip="purple theme" matTooltipClass="text-capitalize" matTooltipPosition="above">
               <i-tabler name="check" class="icon-16 theme-icon"></i-tabler>
             </span>
           </mat-button-toggle>
 
           <mat-button-toggle [value]="'green_theme'">
-            <span class="theme-circle green_theme" matTooltip="green_theme" matTooltipClass="text-uppercase"
-              matTooltipPosition="above">
+            <span class="theme-circle green_theme" matTooltip="green theme" matTooltipClass="text-capitalize" matTooltipPosition="above">
               <i-tabler name="check" class="icon-16 theme-icon"></i-tabler>
             </span>
           </mat-button-toggle>
           <mat-button-toggle [value]="'cyan_theme'">
-            <span class="theme-circle cyan_theme" matTooltip="cyan_theme" matTooltipClass="text-uppercase"
-              matTooltipPosition="above">
+            <span class="theme-circle cyan_theme" matTooltip="cyan theme" matTooltipClass="text-capitalize" matTooltipPosition="above">
               <i-tabler name="check" class="icon-16 theme-icon"></i-tabler>
             </span>
           </mat-button-toggle>
           <mat-button-toggle [value]="'orange_theme'">
-            <span class="theme-circle orange_theme" matTooltip="orange_theme" matTooltipClass="text-uppercase"
-              matTooltipPosition="above">
+            <span class="theme-circle orange_theme" matTooltip="orange theme" matTooltipClass="text-capitalize" matTooltipPosition="above">
               <i-tabler name="check" class="icon-16 theme-icon"></i-tabler>
             </span>
           </mat-button-toggle>
@@ -69,8 +60,7 @@
         {{ "Theme Direction" | translate }}
       </h6>
 
-      <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="options.dir" (change)="setDir($event.value)"
-        class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
+      <mat-button-toggle-group (change)="setDir($event.value)" #group="matButtonToggleGroup" [(ngModel)]="options.dir" class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
         <mat-button-toggle [value]="'ltr'">
           <div class="d-flex align-items-center f-w-500">
             <i-tabler name="text-direction-ltr" class="d-flex m-r-8 fill-icon"></i-tabler>
@@ -90,8 +80,7 @@
         {{ "Layout type" | translate }}
       </h6>
 
-      <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="options.horizontal"
-        class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
+      <mat-button-toggle-group (change)="setLayout($event.value)" #group="matButtonToggleGroup" [(ngModel)]="options.horizontal" class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
         <mat-button-toggle [value]="false">
           <div class="d-flex align-items-center f-w-500">
             <i-tabler name="layout-distribute-vertical" class="d-flex m-r-8 fill-icon"></i-tabler>
@@ -111,9 +100,7 @@
             {{ "Sidebar type" | translate }}
           </h6>
 
-          <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="options.sidenavCollapsed"
-            (change)="setSidebar($event.value)" class="customizer-button-group gap-16"
-            [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
+          <mat-button-toggle-group (change)="setSidebar($event.value)" #group="matButtonToggleGroup" [(ngModel)]="options.sidenavCollapsed" class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
             <mat-button-toggle [value]="false">
               <div class="d-flex align-items-center f-w-500">
                 <i-tabler name="layout-sidebar-right" class="d-flex m-r-8 fill-icon"></i-tabler>
@@ -133,8 +120,7 @@
         {{ "Card with" | translate }}
       </h6>
 
-      <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="options.cardBorder"
-        class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
+      <mat-button-toggle-group (change)="setCardBoder($event.value)" #group="matButtonToggleGroup" [(ngModel)]="options.cardBorder" class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
         <mat-button-toggle [value]="false">
           <div class="d-flex align-items-center f-w-500">
             <i-tabler name="shadow" class="d-flex m-r-8 fill-icon"></i-tabler>
@@ -153,8 +139,7 @@
         {{ "Container Option" | translate }}
       </h6>
 
-      <mat-button-toggle-group #group="matButtonToggleGroup" [(ngModel)]="options.boxed"
-        class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
+      <mat-button-toggle-group (change)="setBoxed($event.value)" #group="matButtonToggleGroup" [(ngModel)]="options.boxed" class="customizer-button-group gap-16" [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()">
         <mat-button-toggle [value]="false">
           <div class="d-flex align-items-center f-w-500">
             <i-tabler name="layout-navbar" class="d-flex m-r-8 fill-icon"></i-tabler>

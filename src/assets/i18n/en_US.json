@@ -37,5 +37,9 @@
   "should be at least": "should be at least",
   "characters": "characters",
   "Your Admin Dashboard": "Your Admin Dashboard",
-  "New to": "New to"
+  "New to": "New to",
+  "User Management": "User Management",
+  "Users": "Users",
+  "Roles": "Roles",
+  "Permissions": "Permissions"
 }
