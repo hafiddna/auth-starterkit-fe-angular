@@ -62,6 +62,7 @@ export class AppHorizontalHeaderComponent {
     code: 'en',
     type: 'US',
     icon: '/assets/images/flag/icon-flag-en.svg',
+    isRTL: false,
   };
 
   public languages: any[] = [
@@ -70,12 +71,14 @@ export class AppHorizontalHeaderComponent {
       code: 'en',
       type: 'US',
       icon: '/assets/images/flag/icon-flag-en.svg',
+      isRTL: false,
     },
     {
       language: 'Indonesia',
       code: 'id',
       type: 'ID',
       icon: '/assets/images/flag/icon-flag-id.png',
+      isRTL: false,
     }
   ];
 
@@ -104,6 +107,12 @@ export class AppHorizontalHeaderComponent {
   }
 
   changeLanguage(lang: any): void {
+    if (lang.isRTL) {
+      this.options.dir = 'rtl';
+    } else {
+      this.options.dir = 'ltr';
+    }
+
     this.translate.use(`${lang.code}_${lang.type}`);
     this.selectedLanguage = lang;
     this.options.language = `${lang.code}_${lang.type}`;
