@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { TokenService } from "./token.service";
 import { environment } from "../../environments/environment";
@@ -12,11 +12,11 @@ import { BaseResponse } from "../interfaces/base-response";
 export class AuthService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private tokenService: TokenService) { }
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   // API call to refresh token
-  refreshToken(refreshToken: string): Observable<{ data: { access_token: string; refresh_token: string } }> {
-    return this.http.post<{ data: { access_token: string; refresh_token: string } }>(
+  refreshToken(refreshToken: string): Observable<BaseResponse<{ access_token: string; refresh_token: string }>> {
+    return this.http.post<BaseResponse<{ access_token: string; refresh_token: string }>>(
       // TODO: Decrypt data on production
       `${this.apiUrl}/refresh-token`,
       { refresh_token: refreshToken }
@@ -30,7 +30,7 @@ export class AuthService {
 
   // Login and save tokens
   login(credentials: { credential: string; password: string; remember: boolean }) {
-    return this.http.post<{ data: { access_token: string; refresh_token: string } }>(
+    return this.http.post<BaseResponse<{ access_token: string; refresh_token: string }>>(
       // TODO: Decrypt data on production
       `${this.apiUrl}/login`,
       credentials
@@ -40,10 +40,6 @@ export class AuthService {
         this.tokenService.setRefreshToken(tokens.data.refresh_token).then(() => {});
       })
     );
-  }
-
-  getProfile(): Observable<BaseResponse<UserProfile>> {
-    return this.http.get<BaseResponse<UserProfile>>(`${this.apiUrl}/profile`)
   }
 
   // Logout and clear tokens

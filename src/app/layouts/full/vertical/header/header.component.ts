@@ -10,10 +10,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AppSettings } from 'src/app/config';
-import { Observable } from 'rxjs';
-import { UserProfile } from 'src/app/interfaces/user-profile';
-import { map } from "rxjs/operators";
 import { AuthService } from 'src/app/services/auth.service';
+import { ProfileService } from "../../../../services/profile.service";
 
 interface notifications {
   id: number;
@@ -65,7 +63,6 @@ export class HeaderComponent {
   @Output() toggleCollapsed = new EventEmitter<void>();
 
 
-  profile$!: Observable<UserProfile>
   showFiller = false;
 
   public selectedLanguage: any = {
@@ -97,7 +94,8 @@ export class HeaderComponent {
     public dialog: MatDialog,
     private translate: TranslateService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private profileService: ProfileService
   ) {
     translate.setDefaultLang(this.options.language);
     this.languages.forEach((lang) => {
@@ -105,13 +103,10 @@ export class HeaderComponent {
         this.selectedLanguage = lang;
       }
     });
-    this.profile$ = this.authService.getProfile().pipe(
-      map((response) => response.data)
-    );
   }
 
   options = this.settings.getOptions();
-
+  profile = this.profileService.getProfileSignal();
 
   openDialog() {
     const dialogRef = this.dialog.open(AppSearchDialogComponent);

@@ -1,12 +1,11 @@
 import { Injectable, signal } from '@angular/core';
-import { AppSettings, defaults } from '../config';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AppSettings, defaults } from '../config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoreService {
-  // TODO: Get from localstorage first, if there is no value, get from defaults
   private optionsSignal = signal<AppSettings>(defaults);
   private notify$ = new BehaviorSubject<Record<string, any>>({});
 
@@ -37,13 +36,5 @@ export class CoreService {
     localStorage.setItem('options', JSON.stringify(this.optionsSignal()));
     this.notify$.next(this.optionsSignal);
 
-  }
-
-  setLanguage(lang: string) {
-    this.setOptions({ language: lang });
-  }
-
-  getLanguage() {
-    return this.getOptions().language;
   }
 }

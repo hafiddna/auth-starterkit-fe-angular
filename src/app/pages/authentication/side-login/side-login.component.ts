@@ -5,10 +5,10 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { TranslateModule } from "@ngx-translate/core";
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { tap, catchError, throwError } from 'rxjs';
-import { MaterialModule } from "../../../material.module";
-import { BrandingComponent } from "../../../layouts/full/vertical/sidebar/branding.component";
-import { AuthService } from "../../../services/auth.service";
 import { environment } from "../../../../environments/environment";
+import { BrandingComponent } from "../../../layouts/full/vertical/sidebar/branding.component";
+import { MaterialModule } from "../../../material.module";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: 'app-side-login',

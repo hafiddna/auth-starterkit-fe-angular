@@ -1,27 +1,27 @@
 import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
-import { CoreService } from 'src/app/services/core.service';
-import { AppSettings } from 'src/app/config';
-import { filter, map } from 'rxjs/operators';
-import { NavigationEnd, Router } from '@angular/router';
-import { navItems } from './vertical/sidebar/sidebar-data';
-import { NavService } from '../../services/nav.service';
-import { AppNavItemComponent } from './vertical/sidebar/nav-item/nav-item.component';
-import { RouterModule } from '@angular/router';
-import { MaterialModule } from 'src/app/material.module';
-import { AsyncPipe, CommonModule } from '@angular/common';
-import { SidebarComponent } from './vertical/sidebar/sidebar.component';
-import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { TranslateModule } from "@ngx-translate/core";
 import { TablerIconsModule } from 'angular-tabler-icons';
-import { HeaderComponent } from './vertical/header/header.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { NavService } from '../../services/nav.service';
+import { ProfileService } from "../../services/profile.service";
 import { AppHorizontalHeaderComponent } from './horizontal/header/header.component';
 import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.component';
 import { AppBreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
-import { UserProfile } from "../../interfaces/user-profile";
+import { AppSettings } from 'src/app/config';
+import { MaterialModule } from 'src/app/material.module';
+import { CoreService } from 'src/app/services/core.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { HeaderComponent } from './vertical/header/header.component';
+import { AppNavItemComponent } from './vertical/sidebar/nav-item/nav-item.component';
+import { SidebarComponent } from './vertical/sidebar/sidebar.component';
+import { navItems } from './vertical/sidebar/sidebar-data';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -46,7 +46,6 @@ interface quicklinks {
 @Component({
   selector: 'app-full',
   imports: [
-    AsyncPipe,
     RouterModule,
     AppNavItemComponent,
     MaterialModule,
@@ -59,6 +58,7 @@ interface quicklinks {
     AppHorizontalSidebarComponent,
     AppBreadcrumbComponent,
     CustomizerComponent,
+    TranslateModule,
   ],
   templateUrl: './full.component.html',
   styleUrls: [],
@@ -66,7 +66,6 @@ interface quicklinks {
 })
 export class FullComponent implements OnDestroy {
   navItems = navItems;
-  profile$!: Observable<UserProfile>
 
   @ViewChild('leftsidenav')
   public sidenav: MatSidenav;
@@ -74,6 +73,7 @@ export class FullComponent implements OnDestroy {
   @ViewChild('content', { static: true }) content!: MatSidenavContent;
   //get options from service
   options = this.settings.getOptions();
+  profile = this.profileService.getProfileSignal();
   private layoutChangesSubscription = Subscription.EMPTY;
   private isMobileScreen = false;
   private isContentWidthFixed = true;
@@ -197,7 +197,8 @@ export class FullComponent implements OnDestroy {
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     private navService: NavService,
-    private authService: AuthService
+    private authService: AuthService,
+    private profileService: ProfileService
   ) {
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
@@ -222,10 +223,6 @@ export class FullComponent implements OnDestroy {
       .subscribe((e) => {
         this.content.scrollTo({ top: 0 });
       });
-
-    this.profile$ = this.authService.getProfile().pipe(
-      map((response) => response.data)
-    );
   }
 
   ngOnDestroy() {

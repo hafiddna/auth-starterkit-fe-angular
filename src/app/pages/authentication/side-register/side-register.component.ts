@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { CoreService } from 'src/app/services/core.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { MaterialModule } from 'src/app/material.module';
-import { BrandingComponent } from 'src/app/layouts/full/vertical/sidebar/branding.component';
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from "@ngx-translate/core";
 import { environment } from "../../../../environments/environment";
+import { BrandingComponent } from 'src/app/layouts/full/vertical/sidebar/branding.component';
+import { MaterialModule } from 'src/app/material.module';
+import { CoreService } from 'src/app/services/core.service';
 
 @Component({
   selector: 'app-side-register',

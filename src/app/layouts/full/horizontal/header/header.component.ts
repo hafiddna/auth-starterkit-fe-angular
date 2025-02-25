@@ -9,11 +9,8 @@ import { MaterialModule } from 'src/app/material.module';
 import { BrandingComponent } from '../../vertical/sidebar/branding.component';
 import { AppSettings } from 'src/app/config';
 import { FormsModule } from '@angular/forms';
-import { Observable } from "rxjs";
-import { UserProfile } from "../../../../interfaces/user-profile";
-import { map } from "rxjs/operators";
 import { AuthService } from 'src/app/services/auth.service';
-import { AsyncPipe, NgIf } from "@angular/common";
+import { ProfileService } from "../../../../services/profile.service";
 
 interface notifications {
   id: number;
@@ -46,7 +43,7 @@ interface quicklinks {
 
 @Component({
   selector: 'app-horizontal-header',
-  imports: [RouterModule, TablerIconsModule, MaterialModule, BrandingComponent, AsyncPipe, NgIf, TranslateModule],
+  imports: [RouterModule, TablerIconsModule, MaterialModule, BrandingComponent, TranslateModule],
   templateUrl: './header.component.html',
 })
 export class AppHorizontalHeaderComponent {
@@ -55,8 +52,6 @@ export class AppHorizontalHeaderComponent {
   @Output() toggleMobileNav = new EventEmitter<void>();
   @Output() toggleMobileFilterNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
-
-  profile$!: Observable<UserProfile>
 
   showFiller = false;
 
@@ -89,7 +84,8 @@ export class AppHorizontalHeaderComponent {
     public dialog: MatDialog,
     private translate: TranslateService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private profileService: ProfileService
   ) {
     translate.setDefaultLang(this.options.language);
     this.languages.forEach((lang) => {
@@ -97,9 +93,6 @@ export class AppHorizontalHeaderComponent {
         this.selectedLanguage = lang;
       }
     });
-    this.profile$ = this.authService.getProfile().pipe(
-      map((response) => response.data)
-    );
   }
 
   openDialog() {
@@ -118,6 +111,7 @@ export class AppHorizontalHeaderComponent {
   }
 
   options = this.settings.getOptions();
+  profile = this.profileService.getProfileSignal();
 
   private emitOptions() {
     this.optionsChange.emit(this.options);

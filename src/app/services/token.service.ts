@@ -1,5 +1,10 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { openDB } from 'idb';
+import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
+import { BaseResponse } from "../interfaces/base-response";
+import { UserProfile } from "../interfaces/user-profile";
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +13,9 @@ export class TokenService {
   private accessToken: string | null = null;
   private dbName = 'authDB';
   private storeName = 'tokens';
+  private apiUrl = environment.apiUrl;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.initDB();
   }
 
@@ -49,5 +55,9 @@ export class TokenService {
   async clearRefreshToken() {
     const db = await openDB(this.dbName, 1);
     await db.delete(this.storeName, 'refresh_token');
+  }
+
+  getProfile(): Observable<BaseResponse<UserProfile>> {
+    return this.http.get<BaseResponse<UserProfile>>(`${this.apiUrl}/profile`)
   }
 }
