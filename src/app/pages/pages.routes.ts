@@ -23,7 +23,7 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Users',
       urls: [
-        { title: 'Home', url: '/dashboard' },
+        { title: 'Apps', url: '/dashboard' },
         { title: 'User Management', url: '/user-management/users' },
         { title: 'Users' }
       ]
@@ -35,7 +35,7 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Roles',
       urls: [
-        { title: 'Home', url: '/dashboard' },
+        { title: 'Apps', url: '/dashboard' },
         { title: 'User Management', url: '/user-management/users' },
         { title: 'Roles' }
       ]
@@ -47,7 +47,7 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Permissions',
       urls: [
-        { title: 'Home', url: '/dashboard' },
+        { title: 'Apps', url: '/dashboard' },
         { title: 'User Management', url: '/user-management/users' },
         { title: 'Permissions' }
       ]
