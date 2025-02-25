@@ -42,5 +42,6 @@
   "Users": "Users",
   "Roles": "Roles",
   "Permissions": "Permissions",
-  "User": "User"
+  "User": "User",
+  "Name": "Name"
 }
