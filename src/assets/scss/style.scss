@@ -30,7 +30,10 @@
 @use "dark/dark";
 
 
+// pages
 @use "pages/auth";
+@use "pages/dashboard";
+@use "pages/toast";
 
 // RTL Theme
 @use "rtl/rtl";

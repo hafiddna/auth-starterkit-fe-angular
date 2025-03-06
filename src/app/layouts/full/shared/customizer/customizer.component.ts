@@ -17,6 +17,7 @@ import { TranslateModule } from "@ngx-translate/core";
   selector: 'app-customizer',
   imports: [TablerIconsModule, MaterialModule, FormsModule, NgScrollbarModule, TranslateModule],
   templateUrl: './customizer.component.html',
+  styleUrls: ['./customizer.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomizerComponent {

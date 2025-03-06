@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { AddComponent } from "./add/add.component";
+import { AddPermissionComponent } from "./add/add.component";
 import { MaterialModule } from 'src/app/material.module';
 import { Permission } from "./permissions";
 
@@ -179,7 +179,7 @@ export class PermissionsComponent implements AfterViewInit{
       Projects: row_obj.Projects,
       imagePath: row_obj.imagePath,
     });
-    this.dialog.open(AddComponent);
+    this.dialog.open(AddPermissionComponent);
     this.table.renderRows();
   }
 

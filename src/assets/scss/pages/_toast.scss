@@ -1,0 +1,24 @@
+@use "../variables" as *;
+
+html {
+  .toast-success {
+    background-color: $success;
+  }
+
+  .toast-error {
+    background-color: $error;
+  }
+
+  .toast-warning {
+    background-color: $warning;
+  }
+
+  .toast-info {
+    background-color: $primary;
+  }
+
+  .toast-container .ngx-toastr {
+    box-shadow: var(--mat-sys-level2);
+    border-radius: $border-radius;
+  }
+}
