@@ -81,7 +81,6 @@ export class AppVerifyCredentialComponent {
   checkOtpCompletion() {
     const otpValues = this.otpControls.map(control => control.value).join('');
     if (otpValues.length === this.otpLength) {
-      console.log('OTP Completed:', otpValues);
       this.submit();
     }
   }
@@ -91,6 +90,6 @@ export class AppVerifyCredentialComponent {
   }
 
   submit() {
-    alert("Submitted verification email" + this.otpControls.map(control => control.value).join(''));
+    alert("Submitted verification email " + this.otpControls.map(control => control.value).join(''));
   }
 }
