@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { TokenService } from "./token.service";
 import { environment } from "../../environments/environment";
-import { UserProfile } from "../interfaces/user-profile";
 import { BaseResponse } from "../interfaces/base-response";
 
 @Injectable({
@@ -37,7 +36,9 @@ export class AuthService {
     ).pipe(
       tap((tokens) => {
         this.tokenService.setAccessToken(tokens.data.access_token);
-        this.tokenService.setRefreshToken(tokens.data.refresh_token).then(() => {});
+        if (credentials.remember) {
+          this.tokenService.setRefreshToken(tokens.data.refresh_token).then(() => {});
+        }
       })
     );
   }
