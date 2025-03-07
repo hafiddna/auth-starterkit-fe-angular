@@ -4,7 +4,7 @@ import { AppForgotPasswordComponent } from "./forgot-password/forgot-password.co
 import { AppResetPasswordComponent } from "./reset-password/reset-password.component";
 import { AppSideLoginComponent } from './side-login/side-login.component';
 import { AppSideRegisterComponent } from './side-register/side-register.component';
-import { AppVerifyEmailComponent } from "./verify-email/verify-email.component";
+import { AppVerifyCredentialComponent } from "./verify-credential/verify-credential.component";
 
 export const AuthenticationRoutes: Routes = [
   {
@@ -32,8 +32,8 @@ export const AuthenticationRoutes: Routes = [
         component: AppResetPasswordComponent
       },
       {
-        path: 'verify-email/:token',
-        component: AppVerifyEmailComponent
+        path: 'verify-credential/:token',
+        component: AppVerifyCredentialComponent
       },
     ],
   },

@@ -71,9 +71,9 @@
                   [attr.aria-pressed]="hide()"
                   type="button"
                 >
-                  <mat-icon
-                    size="small"
-                  >{{hide() ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  <mat-icon class="f-s-16 d-flex align-items-center justify-content-center">
+                    {{hide() ? 'visibility' : 'visibility_off'}}
+                  </mat-icon>
                 </button>
                 @if(f['password'].touched && f['password'].invalid){
                 <mat-hint class="m-b-16 error-msg">
