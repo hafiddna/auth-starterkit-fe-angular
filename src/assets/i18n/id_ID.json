@@ -81,5 +81,8 @@
   "Frontend Engineer": "Insinyur Frontend",
   "Assigned": "Ditugaskan",
   "Priority": "Prioritas",
-  "Budget": "Anggaran"
+  "Budget": "Anggaran",
+  "Forgot your password?": "Lupa kata sandi Anda?",
+  "Please enter the credential associated with your account and We will credential you a link to reset your password.": "Masukkan kredensial yang terkait dengan akun Anda dan Kami akan memberi Anda tautan untuk mereset kata sandi Anda.",
+  "Back to Login": "Kembali ke Login"
 }

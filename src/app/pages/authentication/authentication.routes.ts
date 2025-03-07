@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { AppChangePasswordComponent } from "./change-password/change-password.component";
 import { AppErrorComponent } from './error/error.component';
 import { AppForgotPasswordComponent } from "./forgot-password/forgot-password.component";
+import { AppResetPasswordComponent } from "./reset-password/reset-password.component";
 import { AppSideLoginComponent } from './side-login/side-login.component';
 import { AppSideRegisterComponent } from './side-register/side-register.component';
 import { AppVerifyEmailComponent } from "./verify-email/verify-email.component";
@@ -28,8 +28,8 @@ export const AuthenticationRoutes: Routes = [
         component: AppForgotPasswordComponent
       },
       {
-        path: 'change-password/:token',
-        component: AppChangePasswordComponent
+        path: 'reset-password/:token',
+        component: AppResetPasswordComponent
       },
       {
         path: 'verify-email/:token',

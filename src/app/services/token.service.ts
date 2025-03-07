@@ -58,6 +58,7 @@ export class TokenService {
   }
 
   getProfile(): Observable<BaseResponse<UserProfile>> {
+    // TODO: Decrypt data on production
     return this.http.get<BaseResponse<UserProfile>>(`${this.apiUrl}/profile`)
   }
 }

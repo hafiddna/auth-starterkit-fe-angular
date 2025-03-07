@@ -46,6 +46,7 @@ export class AuthService {
   // Logout and clear tokens
   logout() {
     return this.http.post<{ status_code: number; message: string }>(
+      // TODO: Decrypt data on production
       `${this.apiUrl}/logout`,
       null,
     ).pipe(
@@ -54,5 +55,17 @@ export class AuthService {
         this.tokenService.clearRefreshToken().then(() => {});
       })
     );
+  }
+
+  // TODO: Register
+  register() {
+  }
+
+  // TODO: Forgot password
+  forgotPassword() {
+  }
+
+  // TODO: Reset password
+  resetPassword() {
   }
 }

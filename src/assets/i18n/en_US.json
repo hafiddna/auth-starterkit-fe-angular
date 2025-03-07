@@ -81,5 +81,8 @@
   "Frontend Engineer": "Frontend Engineer",
   "Assigned": "Assigned",
   "Priority": "Priority",
-  "Budget": "Budget"
+  "Budget": "Budget",
+  "Forgot your password?": "Forgot your password?",
+  "Please enter the credential associated with your account and We will credential you a link to reset your password.": "Please enter the credential associated with your account and We will credential you a link to reset your password.",
+  "Back to Login": "Back to Login"
 }
