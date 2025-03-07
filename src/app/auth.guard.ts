@@ -18,7 +18,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   return from(tokenService.getRefreshToken()).pipe(
     switchMap((refreshToken) => {
       if (!refreshToken) {
-        router.navigate(['/login', { queryParams: { redirect: state.url } }]);
+        router.navigate(['/login', {queryParams: {redirect: state.url}}]).then(() => {});
         return of(false); // Redirect to login if no refresh token
       }
 
@@ -26,13 +26,13 @@ export const authGuard: CanActivateFn = (route, state) => {
       return authService.refreshToken(refreshToken).pipe(
         switchMap(() => of(true)), // On success, allow navigation
         catchError(() => {
-          router.navigate(['/login', { queryParams: { redirect: state.url } }]);
+          router.navigate(['/login', {queryParams: {redirect: state.url}}]).then(() => {});
           return of(false); // On error, redirect to login
         })
       );
     }),
     catchError(() => {
-      router.navigate(['/login'], { queryParams: { redirect: state.url } });
+      router.navigate(['/login'], { queryParams: { redirect: state.url } }).then(() => {});
       return of(false);
     })
   );
