@@ -90,5 +90,10 @@
   "Type your 6 digits security code": "Ketik kode keamanan 6 digit Anda",
   "Verify My Account": "Verifikasi Akun Saya",
   "Resend": "Kirim Ulang",
-  "Didn't get the code?": "Tidak mendapatkan kode?"
+  "Didn't get the code?": "Tidak mendapatkan kode?",
+  "Reset Password": "Atur Ulang Kata Sandi",
+  "Enter your new password": "Masukkan kata sandi baru Anda",
+  "Password Confirmation": "Konfirmasi Kata Sandi",
+  "Remember your password": "Ingat kata sandi Anda",
+  "Password must be at least 8 characters": "Kata sandi harus setidaknya 8 karakter"
 }
