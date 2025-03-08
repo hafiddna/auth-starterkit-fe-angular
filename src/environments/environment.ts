@@ -5,6 +5,8 @@ export const environment = {
   apiUrl: "",
   // TODO: Auth JWT Public Key
   authJwtPublicKey: "",
+  // TODO: Auth Data Key
+  authDataKey: "",
   // TODO: Data Encryption Key
   dataEncryptionKey: ""
 };
