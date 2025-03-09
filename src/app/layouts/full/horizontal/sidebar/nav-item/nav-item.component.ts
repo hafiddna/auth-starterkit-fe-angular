@@ -30,31 +30,38 @@ export class AppHorizontalNavItemComponent implements OnInit {
   }
 
   checkPermissions(permissions: string[] | undefined): boolean {
-    if (!permissions) {
+    if (!permissions || permissions.length === 0) {
       return true;
     }
 
-    if (!this.authData) {
+    if (!this.authData || !this.authData.permissions) {
       return false;
     }
 
-    for (const permission of permissions) {
-      if (permission === '*') {
-        return true;
+    for (const requiredPermission of permissions) {
+      if (requiredPermission === '*:*' || requiredPermission === '*') {
+        return true; // Full access wildcard
       }
 
-      if (permission.startsWith('*:')) {
-        const permissionName = permission.split(':')[1];
-        if (this.authData.permissions.includes(permissionName)) {
+      for (const userPermission of this.authData.permissions) {
+        // Exact match
+        if (userPermission === requiredPermission) {
           return true;
         }
-      }
 
-      if (this.authData.permissions.includes(permission)) {
-        return true;
+        // Handle wildcards like "*:permissions"
+        const [requiredAction, requiredResource] = requiredPermission.split(':');
+        const [userAction, userResource] = userPermission.split(':');
+
+        if (
+          (requiredAction === '*' || requiredAction === userAction) &&
+          (requiredResource === '*' || requiredResource === userResource)
+        ) {
+          return true; // Match any action or resource
+        }
       }
     }
 
-    return false;
+    return false; // No match found
   }
 }
