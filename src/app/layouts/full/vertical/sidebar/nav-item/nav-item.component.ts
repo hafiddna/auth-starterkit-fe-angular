@@ -1,26 +1,13 @@
-import {
-  Component,
-  HostBinding,
-  Input,
-  OnInit,
-  OnChanges,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import { NavItem } from './nav-item';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
+import { Component, HostBinding, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavService } from '../../../../../services/nav.service';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
+import { NavItem } from './nav-item';
+import { NavService } from '../../../../../services/nav.service';
+import { JWTUser } from "../../../../../services/token.service";
 import { MaterialModule } from 'src/app/material.module';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nav-item',
@@ -48,6 +35,7 @@ export class AppNavItemComponent implements OnChanges {
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item: NavItem | any;
   @Input() depth: any;
+  @Input() authData: JWTUser | null;
 
   constructor(public navService: NavService, public router: Router) {
     if (this.depth === undefined) {
@@ -89,5 +77,34 @@ export class AppNavItemComponent implements OnChanges {
         this.notify.emit();
       }
     }
+  }
+
+  checkPermissions(permissions: string[] | undefined): boolean {
+    if (!permissions) {
+      return true;
+    }
+
+    if (!this.authData) {
+      return false;
+    }
+
+    for (const permission of permissions) {
+      if (permission === '*') {
+        return true;
+      }
+
+      if (permission.startsWith('*:')) {
+        const permissionName = permission.split(':')[1];
+        if (this.authData.permissions.includes(permissionName)) {
+          return true;
+        }
+      }
+
+      if (this.authData.permissions.includes(permission)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

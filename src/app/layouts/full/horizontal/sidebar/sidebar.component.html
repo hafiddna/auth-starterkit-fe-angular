@@ -4,7 +4,7 @@
     <div>
       <div class="horizontal-navbar hstack align-items-center">
         @for(item of navItems; track item){
-          <app-horizontal-nav-item [item]="item" class="parentBox {{ item.ddType }}">
+          <app-horizontal-nav-item [authData]="authData" [item]="item" class="parentBox {{ item.ddType }}">
           </app-horizontal-nav-item>
         }
       </div>

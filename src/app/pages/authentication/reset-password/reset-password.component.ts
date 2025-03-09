@@ -1,4 +1,3 @@
-import { NgIf } from "@angular/common";
 import { Component, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButton, MatIconButton } from "@angular/material/button";
@@ -13,7 +12,7 @@ import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: 'app-reset-password',
-  imports: [RouterModule, BrandingComponent, MatFormField, MatInput, MatLabel, FormsModule, ReactiveFormsModule, TranslateModule, MatButton, MatHint, MatIcon, MatIconButton, MatSuffix, MatProgressBar, NgIf],
+  imports: [RouterModule, BrandingComponent, MatFormField, MatInput, MatLabel, FormsModule, ReactiveFormsModule, TranslateModule, MatButton, MatHint, MatIcon, MatIconButton, MatSuffix, MatProgressBar],
   templateUrl: './reset-password.component.html'
 })
 export class AppResetPasswordComponent {

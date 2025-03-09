@@ -53,6 +53,11 @@ export class AuthInterceptor implements HttpInterceptor {
     let accessToken = this.tokenService.getAccessToken();
     // Set Authorization header if access token exists
     if (accessToken) {
+      const decodedToken = this.tokenService.decodeToken(accessToken);
+      if (decodedToken) {
+        this.tokenService.setDecodedToken(decodedToken);
+      }
+
       req = req.clone({
         setHeaders: { Authorization: `Bearer ${accessToken}` },
       });

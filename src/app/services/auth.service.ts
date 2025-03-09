@@ -53,6 +53,7 @@ export class AuthService {
       tap(() => {
         this.tokenService.clearAccessToken();
         this.tokenService.clearRefreshToken().then(() => {});
+        this.tokenService.clearDecodedToken();
       })
     );
   }

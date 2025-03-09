@@ -33,7 +33,7 @@
       <ng-scrollbar class="position-relative" style="height: 100%">
         <mat-nav-list class="sidebar-list">
           @for(item of navItems; track item) {
-          <app-nav-item [item]="item" (notify)="sidenav.toggle()">
+          <app-nav-item [authData]="authData" [item]="item" (notify)="sidenav.toggle()">
           </app-nav-item>
           }
         </mat-nav-list>
@@ -85,7 +85,7 @@
     <ng-scrollbar class="position-relative" style="height: 100%">
       <mat-nav-list class="sidebar-list">
         @for(item of navItems; track item) {
-        <app-nav-item [item]="item" (notify)="sidenav.toggle()"> </app-nav-item>
+        <app-nav-item [authData]="authData" [item]="item" (notify)="sidenav.toggle()"> </app-nav-item>
         }
       </mat-nav-list>
     </ng-scrollbar>
@@ -142,7 +142,7 @@
       (optionsChange)="receiveOptions($event)"
     ></app-horizontal-header>
     } @if(options.horizontal) {
-    <app-horizontal-sidebar></app-horizontal-sidebar>
+    <app-horizontal-sidebar [authData]="authData"></app-horizontal-sidebar>
     }
 
     <main

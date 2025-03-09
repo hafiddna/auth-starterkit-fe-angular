@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NavService } from '../../services/nav.service';
 import { ProfileService } from "../../services/profile.service";
+import { TokenService } from "../../services/token.service";
 import { AppHorizontalHeaderComponent } from './horizontal/header/header.component';
 import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.component';
 import { AppBreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
@@ -65,6 +66,8 @@ interface quicklinks {
   encapsulation: ViewEncapsulation.None
 })
 export class FullComponent implements OnDestroy {
+  authData = this.tokenService.getDecodedToken();
+
   navItems = navItems;
 
   @ViewChild('leftsidenav')
@@ -198,7 +201,8 @@ export class FullComponent implements OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private navService: NavService,
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private tokenService: TokenService
   ) {
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
@@ -207,7 +211,7 @@ export class FullComponent implements OnDestroy {
         // SidenavOpened must be reset true when layout changes
         this.options.sidenavOpened = true;
         this.isMobileScreen = state.breakpoints[MOBILE_VIEW];
-        if (this.options.sidenavCollapsed == false) {
+        if (!this.options.sidenavCollapsed) {
           this.options.sidenavCollapsed = state.breakpoints[TABLET_VIEW];
         }
         this.isContentWidthFixed = state.breakpoints[MONITOR_VIEW];
@@ -220,7 +224,7 @@ export class FullComponent implements OnDestroy {
     // This is for scroll to top
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((e) => {
+      .subscribe(() => {
         this.content.scrollTo({ top: 0 });
       });
   }

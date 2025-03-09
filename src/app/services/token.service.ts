@@ -36,6 +36,7 @@ export interface JWTUser {
 })
 export class TokenService {
   private accessToken: string | null = null;
+  private decodedToken: JWTUser | null = null;
   private dbName = 'authDB';
   private storeName = 'tokens';
   private apiUrl = environment.apiUrl;
@@ -111,6 +112,18 @@ export class TokenService {
       console.error('Invalid token', error);
       return null;
     }
+  }
+
+  setDecodedToken(token: JWTUser) {
+    this.decodedToken = token;
+  }
+
+  getDecodedToken(): JWTUser | null {
+    return this.decodedToken;
+  }
+
+  clearDecodedToken() {
+    this.decodedToken = null;
   }
 
   /** REFRESH TOKEN METHODS (Stored in IndexedDB) **/

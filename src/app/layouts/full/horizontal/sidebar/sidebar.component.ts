@@ -1,16 +1,11 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ChangeDetectorRef,
-  OnChanges,
-} from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { navItems } from './sidebar-data';
 import { Router } from '@angular/router';
 import { NavService } from '../../../../services/nav.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AppHorizontalNavItemComponent } from './nav-item/nav-item.component';
 import { CommonModule } from '@angular/common';
+import { JWTUser } from "../../../../services/token.service";
 
 @Component({
   selector: 'app-horizontal-sidebar',
@@ -18,6 +13,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './sidebar.component.html',
 })
 export class AppHorizontalSidebarComponent implements OnInit {
+  @Input() authData: JWTUser | null;
+
   navItems = navItems;
 
   mobileQuery: MediaQueryList;
