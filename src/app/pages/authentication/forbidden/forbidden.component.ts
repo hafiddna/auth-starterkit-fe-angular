@@ -3,8 +3,10 @@ import { MatAnchor } from "@angular/material/button";
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-error',
+  selector: 'app-forbidden',
   imports: [RouterModule, MatAnchor],
-  templateUrl: './error.component.html'
+  templateUrl: './forbidden.component.html'
 })
-export class AppErrorComponent {}
+export class ForbiddenComponent {
+
+}

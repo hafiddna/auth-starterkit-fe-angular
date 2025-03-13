@@ -5,6 +5,7 @@ import { AppResetPasswordComponent } from "./reset-password/reset-password.compo
 import { AppSideLoginComponent } from './side-login/side-login.component';
 import { AppSideRegisterComponent } from './side-register/side-register.component';
 import { AppVerifyCredentialComponent } from "./verify-credential/verify-credential.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 export const AuthenticationRoutes: Routes = [
   {
@@ -34,6 +35,10 @@ export const AuthenticationRoutes: Routes = [
       {
         path: 'verify-credential/:token',
         component: AppVerifyCredentialComponent
+      },
+      {
+        path: '**',
+        component: NotFoundComponent,
       },
     ],
   },

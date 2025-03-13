@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { authGuard } from "./auth.guard";
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
-import { NotFoundComponent } from "./pages/authentication/not-found/not-found.component";
 
 export const routes: Routes = [
   {
@@ -34,9 +33,5 @@ export const routes: Routes = [
           ),
       },
     ],
-  },
-  {
-    path: '**',
-    component: NotFoundComponent,
   },
 ];
